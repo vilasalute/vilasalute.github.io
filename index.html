@@ -1,0 +1,2227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Inter:opsz@14..32&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --primary: #18181B;
+        /* --primary: #000000; */
+        /* --primary: #3b82f6; */
+        --bg: #ffffff;
+        --text: #111827;
+        --muted: #6b7280;
+        --white: #ffffff;
+      }
+
+      .text-black { color: black; }
+      .text-muted { color: var(--muted); }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        height: 100%;
+        font-family: "Nunito Sans", system-ui, sans-serif;
+        line-height: 1;
+        font-size: 16px;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      h1 {
+        margin-bottom: 1.25em;
+        font-size: 2.5rem;
+        font-weight: 700;
+      }
+
+      h2 {
+        margin-bottom: 1em;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      h3 {
+        margin-bottom: 0.75em;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+
+      p {
+        margin-bottom: 1em;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      nav {
+        display: none;
+        font-size: 1rem;
+      }
+
+      ul {
+        display: flex;
+        gap: 1em;
+        list-style-type: none;
+      }
+
+      .badge {
+        margin-bottom: 0.8em;
+        padding: 0.33rem 0.66rem;
+        display: inline-block;
+        background: var(--primary);
+        border-radius: 256px;
+        color: white;
+        font-size: 0.8rem;
+      }
+
+      /* ========== HEADER ========== */
+      .header-wrapper {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.333);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid #e5e7eb;
+        z-index: 1;
+      }
+
+      .header {
+        padding: 1em;
+        width: 100%;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .header__main {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+
+      .header__main__logo {
+        height: 32px;
+        width: 32px;
+      }
+
+      /* ========== HERO SECTION ========== */
+      .hero {
+        position: relative;
+        height: 66.66vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("./hero.webp");
+        background-size: cover;
+        background-position: center;
+        color: white;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.66);
+      }
+
+      .hero--inner {
+        padding: 2em;
+        position: relative;
+        /* display: flex;
+        flex-direction: column; */
+        /* align-items: center; */
+        text-align: center;
+        /* gap: 1em; */
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        max-width: 600px;
+        /* margin: 0 auto 2rem; */
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+
+
+    .btn {
+      padding: 0.8rem 2rem;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+
+    .btn-map {
+      margin-top: 1em;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      background-color: white;
+      cursor: pointer;
+      color: rgb(var(--text));
+      border: 1px solid #E4E4E7;
+      font-weight: 600;
+    }
+
+    .nav-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+
+
+.section {
+  padding: 4em 1em;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+/* ABOUT */
+.about-grid {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.about-stats {
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1em;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem; */
+}
+
+.about-stat {
+  text-align: center;
+}
+
+.about-stat__number {
+  font-size: 1.5rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.about-stat strong {
+  font-size: 1.5rem;
+  color: var(--primary);
+  display: block;
+}
+
+
+.rooms-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.room-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.room-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.room-card-body {
+  padding: 1rem;
+  flex: 1;
+}
+
+.room-card-body__title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.room-card-body h3 {
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.room-price {
+  background: #f3f4f6;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  color: var(--text);
+}
+
+.room-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.room-details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.room-btn {
+  padding: 0.5rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.amenities-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.amenity {
+  text-align: center;
+  padding: 1rem;
+}
+
+.amenity-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  /* background: var(--primary); */
+  background-color: #E7E7E8;
+  color: white;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.amenity h3 {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.review-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.review-card {
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: white;
+}
+
+.review-stars {
+  color: gold;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.review-text {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.reviewer-name {
+  font-weight: bold;
+}
+
+.reviewer-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.location-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.location-detail {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.location-detail-icon {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.location-info h3 {
+  margin: 0 0 0.25rem;
+  font-weight: bold;
+}
+
+.map-box {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-section {
+  background: var(--primary);
+  color: white;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 2rem auto 0;
+}
+
+.cta-buttons a {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.cta-buttons .primary {
+  background: white;
+  color: var(--primary);
+}
+
+.cta-buttons .outline {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 3em 1em;
+  font-size: 0.8rem;
+  background: #fff;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-bottom {
+  width: 100%;
+  text-align: center;
+  margin: 2rem auto 0 auto;
+  padding-top: 2em;
+  color: var(--muted);
+  border-top: 1px solid #E4E4E7;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+
+.lang-menu {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  /* font-size: 1rem; */
+}
+.lang-selected {
+  /* width: 64px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding: 0.4rem 0.6rem; */
+  background: #f1f1f1;
+  /* border-radius: 5px; */
+  font-size: 14px;
+  /* border: 1px solid #ccc; */
+  padding: 0.5rem 1rem;
+      /* border: none; */
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+}
+.lang-selected img {
+  height: 16px;
+}
+.lang-options {
+  width: 64px;
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+.lang-options div {
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+.lang-options div:hover {
+  background: #f0f0f0;
+}
+.lang-options img {
+  width: 20px;
+  height: 14px;
+}
+
+
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        position: relative;
+        width: 90%;
+        max-width: 800px;
+        background-color: #000;
+        padding: 0;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .modal-content-room {
+        position: relative;
+        width: 90%;
+        max-width: 800px;
+        height: 80vh;
+        background-color: white;
+        padding: 0;
+        border-radius: 8px;
+        overflow-y: scroll;
+        /* overflow: hidden; */
+      }
+
+      .modal-content video {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.4);
+        border: none;
+        border-radius: 4px;
+        padding: 0 8px;
+        z-index: 1;
+      }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+
+    .carousel .myimg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .carousel .myimg.active {
+      opacity: 1;
+      /* z-index: 1; */
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      /* font-size: 32px;
+      color: white;
+      background: rgba(0, 0, 0, 0.4);
+      border: none;
+      padding: 2px;
+      cursor: pointer;
+      z-index: 2;
+      border-radius: 50%;
+      user-select: none; */
+      z-index: 2;
+      height: 32px;
+      width: 32px;
+      background-color: transparent;
+      color: white;
+    }
+
+    .arrow:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .left {
+      left: 15px;
+    }
+
+    .right {
+      right: 15px;
+    }
+
+    .progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 5px;
+      background: white;
+      width: 0%;
+      z-index: 2;
+      transition: width linear;
+    }
+
+
+    .carousel-room {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .carousel-room__content {
+      padding: 1em;
+    }
+
+    .carousel-room__content__actions {
+      display: flex;
+      justify-content: center;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 450px;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .thumbnails {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      /* flex-wrap: wrap; */
+      overflow-x: scroll;
+    }
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+
+    .thumbnail.active {
+      border-color: #007bff;
+    }
+
+      @media (min-width: 640px) {
+        .cta-buttons {
+          flex-direction: row;
+          justify-content: center;
+        }
+      }
+
+      @media (min-width: 768px) {
+        header {
+          width: 66%;
+          margin: 0 auto;
+        }
+
+        nav {
+          display: initial;
+        }
+
+        h1 {
+          font-size: 3rem;
+        }
+
+        .hero--inner {
+          padding: 0;
+        }
+
+        .hero__actions {
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .rooms-grid, .amenities-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .review-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        .footer-bottom {
+          width: 50%;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .about-grid, .location-grid {
+          grid-template-columns: repeat(2, 1fr);
+          align-items: center;
+        }
+
+        .rooms-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .amenities-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    </style>
+
+    <script defer>
+      let currentLang = "gb";
+
+      const flagMap = {
+        gb: { emoji: '🇬🇧', img: './flags/gb.svg' },
+        rs: { emoji: '🇷🇸', img: './flags/rs.svg' },
+        de: { emoji: '🇩🇪', img: './flags/de.svg' },
+        bg: { emoji: '🇧🇬', img: './flags/bg.svg' },
+        mk: { emoji: '🇲🇰', img: './flags/mk.svg' },
+        ro: { emoji: '🇷🇴', img: './flags/ro.svg' }
+      };
+
+      const translations = {
+        // ========== HEADER ==========
+        title: {
+          gb: "Villa Salute",
+          rs: "Vila Salute",
+          de: "Villa Salute",
+          bg: "Вила Салуте",
+          mk: "Вила Салуте",
+          ro: "Vila Salute"
+        },
+        aboutLink: {
+          gb: "About",
+          rs: "O nama",
+          de: "Über uns",
+          bg: "За нас",
+          mk: "За нас",
+          ro: "Despre noi"
+        },
+        roomsLink: {
+          gb: "Rooms",
+          rs: "Sobe",
+          de: "Zimmer",
+          bg: "Стаи",
+          mk: "Соби",
+          ro: "Camere"
+        },
+        amenitiesLink: {
+          gb: "Amenities",
+          rs: "Sadržaji",
+          de: "Ausstattung",
+          bg: "Удобства",
+          mk: "Содржини",
+          ro: "Facilități"
+        },
+        locationLink: {
+          gb: "Location",
+          rs: "Lokacija",
+          de: "Standort",
+          bg: "Локация",
+          mk: "Локација",
+          ro: "Locație"
+        },
+        contactLink: {
+          gb: "Contact",
+          rs: "Kontakt",
+          de: "Kontakt",
+          bg: "Контакт",
+          mk: "Контакт",
+          ro: "Contact"
+        },
+        bookNow: {
+          gb: "Book Now",
+          rs: "Rezerviši",
+          de: "Jetzt buchen",
+          bg: "Резервирай сега",
+          mk: "Резервирај сега",
+          ro: "Rezervă acum"
+        },
+        // ========== HERO ==========
+        heroTitle: {
+          gb: "Welcome to Vila Salute",
+          rs: "Dobrodošli u Vila Salute",
+          de: "Willkommen in der Vila Salute",
+          bg: "Добре дошли във Вила Салуте",
+          mk: "Добредојдовте во Вила Салуте",
+          ro: "Bine ați venit la Vila Salute"
+        },
+        heroDescription: {
+          gb: "Your home away from home. Experience comfort, community, and adventure in the heart of the city.",
+          rs: "Vaš dom daleko od kuće. Doživite udobnost, zajedništvo i avanturu u srcu grada.",
+          de: "Ihr Zuhause fern von Zuhause. Erleben Sie Komfort, Gemeinschaft und Abenteuer im Herzen der Stadt.",
+          bg: "Вашият дом далеч от дома. Изживейте комфорт, общност и приключения в сърцето на града.",
+          mk: "Вашиот дом далеку од дома. Доживејте удобност, заедништво и авантура во срцето на градот.",
+          ro: "Casa dumneavoastră departe de casă. Experimentați confortul, comunitatea și aventura în inima orașului."
+        },
+        bookYourStay: {
+          gb: "Book Your Stay",
+          rs: "Rezerviši svoj boravak",
+          de: "Buche deinen Aufenthalt",
+          bg: "Резервирай престоя си",
+          mk: "Резервирај го престојот",
+          ro: "Rezervă-ți șederea"
+        },
+        takeTour: {
+          gb: "Take a Tour",
+          rs: "Pogledaj obilazak",
+          de: "Mach eine Tour",
+          bg: "Разгледай",
+          mk: "Разгледај",
+          ro: "Fă un tur"
+        },
+        // ========== ABOUT ==========
+        aboutBadge: {
+          gb: "About us",
+          rs: "O nama",
+          de: "Über uns",
+          bg: "За нас",
+          mk: "За нас",
+          ro: "Despre noi"
+       },
+        aboutTitle: {
+          gb: "More Than Just a Place to Sleep",
+          rs: "Više od mesta za spavanje",
+          de: "Mehr als nur ein Schlafplatz",
+          bg: "Повече от място за сън",
+          mk: "Повеќе од место за спиење",
+          ro: "Mai mult decât un loc unde să dormi"
+        },
+        aboutDescription: {
+          gb: "Vila Salute is a modern hotel designed for travelers who value comfort, cleanliness, and community. Located in the vibrant heart of the city, we offer the perfect base for exploring local attractions, meeting fellow travelers, and creating unforgettable memories.",
+          rs: "Vila Salute je moderan hotel namenjen putnicima koji cene udobnost, čistoću i zajednicu. Nalazi se u živopisnom srcu grada i predstavlja savršenu bazu za istraživanje lokalnih atrakcija, upoznavanje novih ljudi i stvaranje nezaboravnih uspomena.",
+          de: "Die Villa Salute ist ein modernes Hotel für Reisende, die Wert auf Komfort, Sauberkeit und Gemeinschaft legen. Im lebendigen Herzen der Stadt gelegen, ist sie der perfekte Ausgangspunkt, um lokale Sehenswürdigkeiten zu erkunden, Mitreisende kennenzulernen und unvergessliche Erinnerungen zu schaffen.",
+          bg: "Вила Салуте е модерен хотел, създаден за пътешественици, които ценят комфорта, чистотата и общността. Разположен в оживеното сърце на града, той е идеална база за разглеждане на местните забележителности, срещи с други пътешественици и създаване на незабравими спомени.",
+          mk: "Вила Салуте е модерен хотел наменет за патници кои го ценат комфорот, чистотата и заедницата. Се наоѓа во живописното срце на градот и е совршена база за истражување на локалните атракции, запознавање со други патници и создавање незаборавни спомени.",
+          ro: "Vila Salute este un hotel modern, creat pentru călătorii care apreciază confortul, curățenia și comunitatea. Situat în inima vibrantă a orașului, oferă baza perfectă pentru a explora atracțiile locale, a cunoaște alți călători și a crea amintiri de neuitat."
+        },
+        happyGuests: {
+          gb: "Happy Guests",
+          rs: "Zadovoljnih gostiju",
+          de: "Zufriedene Gäste",
+          bg: "Доволни гости",
+          mk: "Задоволни гости",
+          ro: "Oaspeți mulțumiți"
+        },
+        rating: {
+          gb: "Rating",
+          rs: "Ocena",
+          de: "Bewertung",
+          bg: "Оценка",
+          mk: "Оценка",
+          ro: "Evaluare"
+        },
+        // ========== ACCOMODATIONS ==========
+        accommodationBadge: {
+          gb: "Accommodation",
+          rs: "Smeštaj",
+          de: "Unterkunft",
+          bg: "Настаняване",
+          mk: "Сместување",
+          ro: "Cazare"
+        },
+        accommodationTitle: {
+          gb: "Choose your perfect room",
+          rs: "Izaberite svoju savršenu sobu",
+          de: "Wählen Sie Ihr perfektes Zimmer",
+          bg: "Изберете перфектната стая за вас",
+          mk: "Изберете ја вашата совршена соба",
+          ro: "Alege camera perfectă pentru tine"
+        },
+        accommodationDescription: {
+          gb: "From budget-friendly dorms to private rooms, we have options for every traveler",
+          rs: "Od pristupačnih spavaonica do privatnih soba, imamo ponude za svakog putnika",
+          de: "Von günstigen Schlafsälen bis hin zu privaten Zimmern – wir haben Optionen für jeden Reisenden",
+          bg: "От бюджетни общежития до частни стаи – имаме възможности за всеки пътешественик",
+          mk: "Од достапни домови до приватни соби – нудиме нешто за секој патник",
+          ro: "De la dormitoare accesibile la camere private, avem opțiuni pentru fiecare călător"
+        },
+        details: {
+          gb: "Details",
+          rs: "Detalji",
+          de: "Details",
+          bg: "Детайли",
+          mk: "Детали",
+          ro: "Detalii"
+        },
+        close: {
+          gb: "Close",
+          rs: "Zatvori",
+          de: "Schließen",
+          bg: "Затвори",
+          mk: "Затвори",
+          ro: "Închide"
+        },
+        room1Title: {
+          gb: "Family room with 5 beds and private bathroom",
+          rs: "Porodična soba sa 5 ležajeva i privatnim kupatilom",
+          de: "Familienzimmer mit 5 Betten und eigenem Bad",
+          bg: "Семейна стая с 5 легла и собствена баня",
+          mk: "Собa за семејства со 5 легла и приватно бања",
+          ro: "Cameră familială cu 5 paturi și baie privată"
+        },
+        room1Description: {
+          gb: "Perfect for larger families or a group of friends, this spacious room offers a total of 5 beds – two bunk beds and a comfortable single bed. Tastefully designed for maximum comfort and functionality, guests have a private bathroom equipped with all essentials for a pleasant stay. Ideal for those seeking practicality, comfort, and privacy in one place.",
+          rs: "Idealna za veće porodice ili grupu prijatelja, ova prostrana soba nudi ukupno 5 ležajeva – dva kreveta na sprat i jedan udoban single krevet. Soba je pažljivo uređena kako bi pružila maksimalan komfor i funkcionalnost, a gostima je na raspolaganju privatno kupatilo, opremljeno svim neophodnostima za prijatan boravak. Savršen izbor za one koji žele praktičnost, udobnost i privatnost na jednom mestu.",
+          de: "Ideal für größere Familien oder Freundesgruppen. Dieses geräumige Zimmer bietet insgesamt 5 Betten – zwei Etagenbetten und ein komfortables Einzelbett. Stilvoll eingerichtet für maximalen Komfort und Funktionalität, mit eigenem Bad, ausgestattet mit allem Notwendigen für einen angenehmen Aufenthalt. Perfekt für alle, die Praktikabilität, Komfort und Privatsphäre an einem Ort suchen.",
+          bg: "Перфектна за по‑големи семейства или приятелски групи, тази просторна стая предлага общо 5 легла – два двуетажни и едно удобно единично легло. Внимателно обзаведена за максимален комфорт и функционалност, със собствена баня, оборудвана с всичко необходимо за приятен престой. Идеален избор за тези, които търсят практичност, уют и лично пространство на едно място.",
+          mk: "Совршена за поголеми семејства или група пријатели, оваа пространа соба нуди вкупно 5 легла – две кревети на спрат и едно удобно еднокреветно. Внимателно уредена за максимален комфор и функционалност, со приватна бања опремена со сè потребно за пријатен престој. Идеален избор за оние кои ги ценат практичноста, удобноста и приватноста на едно место.",
+          ro: "Perfectă pentru familii numeroase sau grupuri de prieteni, această cameră spațioasă oferă 5 paturi – două paturi suprapuse și un pat single confortabil. Decorată cu gust pentru confort și funcționalitate maximă, oaspeții au baie privată echipată cu tot ce este necesar pentru un sejur plăcut. Ideală pentru cei care caută practicitate, confort și intimitate într-un singur loc."
+        },
+        room2Title: {
+          gb: "Twin room with separate single beds",
+          rs: "Dvokrevetna soba sa odvojenim single ležajevima",
+          de: "Zweibettzimmer mit getrennten Einzelbetten",
+          bg: "Двойна стая с отделни единични легла",
+          mk: "Двокреветна соба со одделени еднокревети",
+          ro: "Cameră twin cu paturi separate"
+        },
+        room2Description: {
+          gb: "A perfect choice for friends, colleagues or travelers who want their own space to relax. This cozy twin room offers two separate single beds thoughtfully arranged for comfort and privacy. The room is bright, neat and functionally equipped, with access to all necessary amenities for a pleasant stay.",
+          rs: "Savršen izbor za prijatelje, kolege ili putnike koji žele sopstveni prostor za odmor. Ova udobna dvokrevetna soba nudi dva odvojena single ležaja, pažljivo raspoređena kako bi se obezbedio komfor i privatnost. Soba je svetla, uredna i funkcionalno opremljena, uz pristup svim neophodnim sadržajima za prijatan boravak.",
+          de: "Die perfekte Wahl für Freunde, Kollegen oder Reisende, die ihren eigenen Raum zum Entspannen wünschen. Dieses gemütliche Zweibettzimmer bietet zwei getrennte Einzelbetten, sorgfältig angeordnet für Komfort und Privatsphäre. Das Zimmer ist hell, sauber und funktional ausgestattet, mit Zugang zu allen notwendigen Annehmlichkeiten für einen angenehmen Aufenthalt.",
+          bg: "Перфектен избор за приятели, колеги или пътници, които искат своя собствена зона за почивка. Тази уютна двойна стая предлага две отделни единични легла, подредени с внимание за комфорт и поверителност. Стаята е светла, чиста и функционално оборудвана, с достъп до всички необходими удобства за приятен престой.",
+          mk: "Совршен избор за пријатели, колеги или патници кои сакаат сопствен простор за одмор. Оваа комфорна двокреветна соба нуди два одделени еднокревети, внимателно распоредени за удобност и приватност. Стајата е светла, уредна и функционално опремена со сите потребни содржини за пријатен престој.",
+          ro: "Alegerea perfectă pentru prieteni, colegi sau călători care își doresc propriul spațiu de relaxare. Această cameră twin confortabilă oferă două paturi single separate, aranjate atent pentru confort și intimitate. Camera este luminoasă, ordonată și utilată funcțional, cu acces la toate facilitățile necesare pentru un sejur plăcut."
+        },
+        room3Title: {
+          gb: "Twin room with separate single beds",
+          rs: "Dvokrevetna soba sa odvojenim single ležajevima",
+          de: "Zweibettzimmer mit getrennten Einzelbetten",
+          bg: "Двойна стая с отделни единични легла",
+          mk: "Двокреветна соба со одделени еднокревети",
+          ro: "Cameră twin cu paturi separate"
+        },
+        room3Description: {
+          gb: "A perfect choice for friends, colleagues or travelers who want their own space to relax. This cozy twin room offers two separate single beds thoughtfully arranged for comfort and privacy. The room is bright, neat and functionally equipped, with access to all necessary amenities for a pleasant stay.",
+          rs: "Savršen izbor za prijatelje, kolege ili putnike koji žele sopstveni prostor za odmor. Ova udobna dvokrevetna soba nudi dva odvojena single ležaja, pažljivo raspoređena kako bi se obezbedio komfor i privatnost. Soba je svetla, uredna i funkcionalno opremljena, uz pristup svim neophodnim sadržajima za prijatan boravak.",
+          de: "Die perfekte Wahl für Freunde, Kollegen oder Reisende, die ihren eigenen Raum zum Entspannen wünschen. Dieses gemütliche Zweibettzimmer bietet zwei getrennte Einzelbetten, sorgfältig angeordnet für Komfort und Privatsphäre. Das Zimmer ist hell, sauber und funktional ausgestattet, mit Zugang zu allen notwendigen Annehmlichkeiten für einen angenehmen Aufenthalt.",
+          bg: "Перфектен избор за приятели, колеги или пътници, които искат своя собствена зона за почивка. Тази уютна двойна стая предлага две отделни единични легла, подредени с внимание за комфорт и поверителност. Стаята е светла, чиста и функционално оборудвана, с достъп до всички необходими удобства за приятен престой.",
+          mk: "Совршен избор за пријатели, колеги или патници кои сакаат сопствен простор за одмор. Оваа комфорна двокреветна соба нуди два одделени еднокревети, внимателно распоредени за удобност и приватност. Стајата е светла, уредна и функционално опремена со сите потребни содржини за пријатен престој.",
+          ro: "Alegerea perfectă pentru prieteni, colegi sau călători care își doresc propriul spațiu de relaxare. Această cameră twin confortabilă oferă două paturi single separate, aranjate atent pentru confort și intimitate. Camera este luminoasă, ordonată și utilată funcțional, cu acces la toate facilitățile necesare pentru un sejur plăcut."
+        },
+        room4Title: {
+          gb: "Triple room with double and single bed",
+          rs: "Trokrevetna soba sa francuskim i single ležajem",
+          de: "Dreibettzimmer mit Doppel- und Einzelbett",
+          bg: "Тройна стая с двойно и единично легло",
+          mk: "Трокреветна соба со француски и еднокреветен кревет",
+          ro: "Cameră triple cu pat dublu și pat single"
+        },
+        room4Description: {
+          gb: "This comfortable and functional room is ideal for a family, a couple with a child, or three travelers. It offers one double bed (queen/king size) and one single bed, providing ample space for a peaceful and pleasant rest. The room is modernly furnished, air-conditioned and equipped with everything you need for a comfortable stay.",
+          rs: "Ova udobna i funkcionalna soba idealna je za porodicu, par sa detetom ili troje putnika. Nudi jedan francuski ležaj (bračni krevet) i jedan single ležaj, pružajući dovoljno prostora za prijatan i miran odmor. Soba je moderno uređena, klimatizovana i poseduje sve što vam je potrebno za komforan boravak.",
+          de: "Dieses komfortable und funktionale Zimmer ist ideal für eine Familie, ein Paar mit Kind oder drei Reisende. Es bietet ein Doppelbett und ein Einzelbett und bietet reichlich Platz für eine ruhige und angenehme Erholung. Das Zimmer ist modern eingerichtet, klimatisiert und mit allem ausgestattet, was Sie für einen komfortablen Aufenthalt benötigen.",
+          bg: "Тази удобна и функционална стая е идеална за семейство, двойка с дете или трима пътници. Разполага с двойно легло и едно единично легло, осигурявайки достатъчно място за спокоен и приятен отдих. Стаята е модерно обзаведена, климатизирана и оборудвана с всичко необходимо за комфортен престой.",
+          mk: "Оваа комфорна и функционална соба е идеална за семејство, пар со дете или тројца патници. Содржи еден француски и еден еднокреветен кревет, обезбедувајќи доволно простор за мирен и пријатен одмор. Стајата е модерно уредена, климатизирана и опремена со сѐ што ви е потребно за удобен престој.",
+          ro: "Această cameră confortabilă și funcțională este ideală pentru o familie, un cuplu cu copil sau trei călători. Oferă un pat dublu și un pat single, oferind spațiu generos pentru un odihnă liniștită și plăcută. Camera este mobilată modern, cu aer condiționat și dotată cu tot ce aveți nevoie pentru un sejur confortabil."
+        },
+        room5Title: {
+          gb: "Triple room with double and single bed",
+          rs: "Trokrevetna soba sa francuskim i single ležajem",
+          de: "Dreibettzimmer mit Doppel- und Einzelbett",
+          bg: "Тройна стая с двойно и единично легло",
+          mk: "Трокреветна соба со француски и еднокреветен кревет",
+          ro: "Cameră triple cu pat dublu și pat single"
+        },
+        room5Description: {
+          gb: "This comfortable and functional room is ideal for a family, a couple with a child, or three travelers. It offers one double bed (queen/king size) and one single bed, providing ample space for a peaceful and pleasant rest. The room is modernly furnished, air-conditioned and equipped with everything you need for a comfortable stay.",
+          rs: "Ova udobna i funkcionalna soba idealna je za porodicu, par sa detetom ili troje putnika. Nudi jedan francuski ležaj (bračni krevet) i jedan single ležaj, pružajući dovoljno prostora za prijatan i miran odmor. Soba je moderno uređena, klimatizovana i poseduje sve što vam je potrebno za komforan boravak.",
+          de: "Dieses komfortable und funktionale Zimmer ist ideal für eine Familie, ein Paar mit Kind oder drei Reisende. Es bietet ein Doppelbett und ein Einzelbett und bietet reichlich Platz für eine ruhige und angenehme Erholung. Das Zimmer ist modern eingerichtet, klimatisiert und mit allem ausgestattet, was Sie für einen komfortablen Aufenthalt benötigen.",
+          bg: "Тази удобна и функционална стая е идеална за семейство, двойка с дете или трима пътници. Разполага с двойно легло и едно единично легло, осигурявайки достатъчно място за спокоен и приятен отдих. Стаята е модерно обзаведена, климатизирана и оборудвана с всичко необходимо за комфортен престой.",
+          mk: "Оваа комфорна и функционална соба е идеална за семејство, пар со дете или тројца патници. Содржи еден француски и еден еднокреветен кревет, обезбедувајќи доволно простор за мирен и пријатен одмор. Стајата е модерно уредена, климатизирана и опремена со сѐ што ви е потребно за удобен престој.",
+          ro: "Această cameră confortabilă și funcțională este ideală pentru o familie, un cuplu cu copil sau trei călători. Oferă un pat dublu și un pat single, oferind spațiu generos pentru un odihnă liniștită și plăcută. Camera este mobilată modern, cu aer condiționat și dotată cu tot ce aveți nevoie pentru un sejur confortabil."
+        },
+        room6Title: {
+          gb: "Romantic double room with queen bed and balcony",
+          rs: "Romantična soba za dvoje sa francuskim ležajem i balkonom",
+          de: "Romantisches Doppelzimmer mit Queensize-Bett und Balkon",
+          bg: "Романтична двойна стая с френско легло и балкон",
+          mk: "Романтична двокреветна соба со француски кревет и балкон",
+          ro: "Cameră romantică dublă cu pat matrimonial și balcon"
+        },
+        room6Description: {
+          gb: "The perfect choice for couples seeking peace, comfort, and a pleasant atmosphere. The room features a spacious queen-size bed, ideal for relaxation and enjoying time together. A private balcony allows guests to savor morning coffee or evening sunsets in fresh air. Beautifully decorated in warm tones, the room offers a sense of privacy and comfort, suitable both for short stays and longer relaxation.",
+          rs: "Savršen izbor за parove koji traže mir, udobnost i prijatan ambijent. Soba sadrži prostran francuski ležaj, idealan za opuštanje i uživanje u dvoje. Privatni balkon omogućava gostima da uživaju u jutarnjoj kafi ili večernjem zalasku sunca na svežем vazduhu. Pažljivo uređena u toplim tonovima, soba pruža osećaj privatnosti i komfora, pogodna kako za kraći boravak, tako i za duže opuštanje. Uživajte u prijatnom ambijentu i svim pogodnostima koje su vam na raspolaganju.",
+          de: "Die perfekte Wahl für Paare, die Frieden, Komfort und ein angenehmes Ambiente suchen. Das Zimmer verfügt über ein geräumiges Queensize-Bett, ideal zum Entspannen und gemeinsamen Genießen. Ein privater Balkon ermöglicht es den Gästen, morgens Kaffee zu genießen oder abends den Sonnenuntergang bei frischer Luft zu erleben. Warm gestaltet, vermittelt das Zimmer ein Gefühl von Privatsphäre und Behaglichkeit – ideal für kurze Aufenthalte oder längere Entspannung.",
+          bg: "Перфектният избор за двойки, търсещи мир, комфорт и уютна атмосфера. Стаята разполага с просторно френско легло, идеално за релакс и прекарване на време заедно. Частен балкон позволява на гостите да се насладят на сутрешно кафе или вечерни залези на свеж въздух. Красиво декориран в топли тонове, стаята предлага усещане за лично пространство и комфорт – подходяща както за кратки престои, така и за по‑дълги релаксации.",
+          mk: "Совршен избор за парови кои бараат мир, удобност и пријатна атмосфера. Стаата има пространа француска кревет (queen), идеална за релаксација и уживање заедно. Приватниот балкон им овозможува на гостите да уживаат во утринско кафе или вечерни зафати во свеж воздух. Уредена во топли тонови, стаата нуди чувство на приватност и удобност, погодна за кратки престои или подолг одмор.",
+          ro: "Alegerea perfectă pentru cupluri care caută liniște, confort și o atmosferă plăcută. Camera dispune de un pat matrimonial spațios, ideal pentru relaxare și timp petrecut împreună. Un balcon privat permite oaspeților să savureze cafeaua de dimineață sau apusul de soare în aer liber. Decorată frumos în tonuri calde, camera oferă un sentiment de intimitate și confort, potrivit atât pentru sejururi scurte, cât și pentru relaxare prelungită."
+        },
+        room7Title: {
+          gb: "Luxury room with jacuzzi, living area and king-size bed",
+          rs: "Luksuzna soba sa đakuzijem, dnevnim boravkom i king size krevetom",
+          de: "Luxuszimmer mit Jacuzzi, Wohnzimmer und Kingsize-Bett",
+          bg: "Луксозна стая с джакузи, дневна и легло King size",
+          mk: "Луксузна соба со џакузи, дневна и king size кревет",
+          ro: "Cameră de lux cu jacuzzi, living și pat king-size"
+        },
+        room7Description: {
+          gb: "Experience ultimate comfort and elegance in this luxury room—perfect for romantic moments or special occasions. The room features a spacious king-size bed, private jacuzzi for full relaxation, and a stylish living area ideal for enjoying time as a couple. Guests are welcomed with a complimentary bottle of champagne, in an ambiance that exudes sophistication and carefully curated details. Enjoy complete privacy, luxury, and an atmosphere that leaves an impression.",
+          rs: "Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.",
+          de: "Erleben Sie ultimativen Komfort und Eleganz in diesem Luxuszimmer – perfekt für romantische Momente oder besondere Anlässe. Das Zimmer verfügt über ein geräumiges Kingsize-Bett, einen privaten Jacuzzi für vollständige Entspannung und einen stilvollen Wohnbereich, ideal zum Verweilen zu zweit. Gäste werden mit einer Flasche Champagner zur Begrüßung empfangen, in einem Ambiente, das Raffinesse und sorgfältig ausgewählte Details ausstrahlt. Genießen Sie vollständige Privatsphäre, Luxus und eine Atmosphäre, die Eindruck hinterlässt.",
+          bg: "Изпитайте върховен комфорт и елегантност в тази луксозна стая — перфектна за романтични моменти или специални поводи. Стаята разполага с просторно легло king-size, частно джакузи за пълна релаксация и стилна дневна зона, идеална за двойки. Гостите са посрещнати с бутилка шампанско като знак на гостоприемство, в атмосфера, изпълнена с изтънченост и внимателно подбрани детайли. Насладете се на пълна поверителност, лукс и атмосфера, която оставя впечатление.",
+          mk: "Искуствувајте врвен комфор и елеганција во оваа луксузна соба – совршена за романтични моменти или посебни прилики. Собата нуди пространа king size кревет, приватно џакузи за потполна релаксација и стилски дневен дел, идеален за уживање во двоец. Гостите се дочекани со шише шампањ од добредојде, во амбиент кој издишува софистицираност и внимателно избрани детали. Уживајте во целосна приватност, луксуз и атмосфера која остава впечаток.",
+          ro: "Experimentați confort și eleganță supreme în această cameră de lux – perfectă pentru momente romantice sau ocazii speciale. Camera include un pat king-size spațios, jacuzzi privat pentru relaxare totală și un living stilat, ideal pentru momente în doi. Oaspeții sunt întâmpinați cu o sticlă de șampanie, într-o ambianță ce emană sofisticare și detalii atent alese. Bucurați-vă de intimitate completă, lux și o atmosferă care lasă impresie."
+        },
+        room8Title: {
+          gb: "Luxury room with jacuzzi, living area and king-size bed",
+          rs: "Luksuzna soba sa đakuzijem, dnevnim boravkom i king size krevetom",
+          de: "Luxuszimmer mit Jacuzzi, Wohnzimmer und Kingsize-Bett",
+          bg: "Луксозна стая с джакузи, дневна и легло King size",
+          mk: "Луксузна соба со џакузи, дневна и king size кревет",
+          ro: "Cameră de lux cu jacuzzi, living și pat king-size"
+        },
+        room8Description: {
+          gb: "Experience ultimate comfort and elegance in this luxury room—perfect for romantic moments or special occasions. The room features a spacious king-size bed, private jacuzzi for full relaxation, and a stylish living area ideal for enjoying time as a couple. Guests are welcomed with a complimentary bottle of champagne, in an ambiance that exudes sophistication and carefully curated details. Enjoy complete privacy, luxury, and an atmosphere that leaves an impression.",
+          rs: "Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.",
+          de: "Erleben Sie ultimativen Komfort und Eleganz in diesem Luxuszimmer – perfekt für romantische Momente oder besondere Anlässe. Das Zimmer verfügt über ein geräumiges Kingsize-Bett, einen privaten Jacuzzi für vollständige Entspannung und einen stilvollen Wohnbereich, ideal zum Verweilen zu zweit. Gäste werden mit einer Flasche Champagner zur Begrüßung empfangen, in einem Ambiente, das Raffinesse und sorgfältig ausgewählte Details ausstrahlt. Genießen Sie vollständige Privatsphäre, Luxus und eine Atmosphäre, die Eindruck hinterlässt.",
+          bg: "Изпитайте върховен комфорт и елегантност в тази луксозна стая — перфектна за романтични моменти или специални поводи. Стаята разполага с просторно легло king-size, частно джакузи за пълна релаксация и стилна дневна зона, идеална за двойки. Гостите са посрещнати с бутилка шампанско като знак на гостоприемство, в атмосфера, изпълнена с изтънченост и внимателно подбрани детайли. Насладете се на пълна поверителност, лукс и атмосфера, която оставя впечатление.",
+          mk: "Искуствувајте врвен комфор и елеганција во оваа луксузна соба – совршена за романтични моменти или посебни прилики. Собата нуди пространа king size кревет, приватно џакузи за потполна релаксација и стилски дневен дел, идеален за уживање во двоец. Гостите се дочекани со шише шампањ од добредојде, во амбиент кој издишува софистицираност и внимателно избрани детали. Уживајте во целосна приватност, луксуз и атмосфера која остава впечаток.",
+          ro: "Experimentați confort și eleganță supreme în această cameră de lux – perfectă pentru momente romantice sau ocazii speciale. Camera include un pat king-size spațios, jacuzzi privat pentru relaxare totală și un living stilat, ideal pentru momente în doi. Oaspeții sunt întâmpinați cu o sticlă de șampanie, într-o ambianță ce emană sofisticare și detalii atent alese. Bucurați-vă de intimitate completă, lux și o atmosferă care lasă impresie."
+        },
+        room9Title: {
+          gb: "Luxury room with jacuzzi, living area and king-size bed",
+          rs: "Luksuzna soba sa đakuzijem, dnevnim boravkom i king size krevetom",
+          de: "Luxuszimmer mit Jacuzzi, Wohnzimmer und Kingsize-Bett",
+          bg: "Луксозна стая с джакузи, дневна и легло King size",
+          mk: "Луксузна соба со џакузи, дневна и king size кревет",
+          ro: "Cameră de lux cu jacuzzi, living și pat king-size"
+        },
+        room9Description: {
+          gb: "Experience ultimate comfort and elegance in this luxury room—perfect for romantic moments or special occasions. The room features a spacious king-size bed, private jacuzzi for full relaxation, and a stylish living area ideal for enjoying time as a couple. Guests are welcomed with a complimentary bottle of champagne, in an ambiance that exudes sophistication and carefully curated details. Enjoy complete privacy, luxury, and an atmosphere that leaves an impression.",
+          rs: "Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.",
+          de: "Erleben Sie ultimativen Komfort und Eleganz in diesem Luxuszimmer – perfekt für romantische Momente oder besondere Anlässe. Das Zimmer verfügt über ein geräumiges Kingsize-Bett, einen privaten Jacuzzi für vollständige Entspannung und einen stilvollen Wohnbereich, ideal zum Verweilen zu zweit. Gäste werden mit einer Flasche Champagner zur Begrüßung empfangen, in einem Ambiente, das Raffinesse und sorgfältig ausgewählte Details ausstrahlt. Genießen Sie vollständige Privatsphäre, Luxus und eine Atmosphäre, die Eindruck hinterlässt.",
+          bg: "Изпитайте върховен комфорт и елегантност в тази луксозна стая — перфектна за романтични моменти или специални поводи. Стаята разполага с просторно легло king-size, частно джакузи за пълна релаксация и стилна дневна зона, идеална за двойки. Гостите са посрещнати с бутилка шампанско като знак на гостоприемство, в атмосфера, изпълнена с изтънченост и внимателно подбрани детайли. Насладете се на пълна поверителност, лукс и атмосфера, която оставя впечатление.",
+          mk: "Искуствувајте врвен комфор и елеганција во оваа луксузна соба – совршена за романтични моменти или посебни прилики. Собата нуди пространа king size кревет, приватно џакузи за потполна релаксација и стилски дневен дел, идеален за уживање во двоец. Гостите се дочекани со шише шампањ од добредојде, во амбиент кој издишува софистицираност и внимателно избрани детали. Уживајте во целосна приватност, луксуз и атмосфера која остава впечаток.",
+          ro: "Experimentați confort și eleganță supreme în această cameră de lux – perfectă pentru momente romantice sau ocazii speciale. Camera include un pat king-size spațios, jacuzzi privat pentru relaxare totală și un living stilat, ideal pentru momente în doi. Oaspeții sunt întâmpinați cu o sticlă de șampanie, într-o ambianță ce emană sofisticare și detalii atent alese. Bucurați-vă de intimitate completă, lux și o atmosferă care lasă impresie."
+        },
+        room10Title: {
+          gb: "Luxury room with jacuzzi, living area and king-size bed",
+          rs: "Luksuzna soba sa đakuzijem, dnevnim boravkom i king size krevetom",
+          de: "Luxuszimmer mit Jacuzzi, Wohnzimmer und Kingsize-Bett",
+          bg: "Луксозна стая с джакузи, дневна и легло King size",
+          mk: "Луксузна соба со џакузи, дневна и king size кревет",
+          ro: "Cameră de lux cu jacuzzi, living și pat king-size"
+        },
+        room10Description: {
+          gb: "Experience ultimate comfort and elegance in this luxury room—perfect for romantic moments or special occasions. The room features a spacious king-size bed, private jacuzzi for full relaxation, and a stylish living area ideal for enjoying time as a couple. Guests are welcomed with a complimentary bottle of champagne, in an ambiance that exudes sophistication and carefully curated details. Enjoy complete privacy, luxury, and an atmosphere that leaves an impression.",
+          rs: "Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.",
+          de: "Erleben Sie ultimativen Komfort und Eleganz in diesem Luxuszimmer – perfekt für romantische Momente oder besondere Anlässe. Das Zimmer verfügt über ein geräumiges Kingsize-Bett, einen privaten Jacuzzi für vollständige Entspannung und einen stilvollen Wohnbereich, ideal zum Verweilen zu zweit. Gäste werden mit einer Flasche Champagner zur Begrüßung empfangen, in einem Ambiente, das Raffinesse und sorgfältig ausgewählte Details ausstrahlt. Genießen Sie vollständige Privatsphäre, Luxus und eine Atmosphäre, die Eindruck hinterlässt.",
+          bg: "Изпитайте върховен комфорт и елегантност в тази луксозна стая — перфектна за романтични моменти или специални поводи. Стаята разполага с просторно легло king-size, частно джакузи за пълна релаксация и стилна дневна зона, идеална за двойки. Гостите са посрещнати с бутилка шампанско като знак на гостоприемство, в атмосфера, изпълнена с изтънченост и внимателно подбрани детайли. Насладете се на пълна поверителност, лукс и атмосфера, която оставя впечатление.",
+          mk: "Искуствувајте врвен комфор и елеганција во оваа луксузна соба – совршена за романтични моменти или посебни прилики. Собата нуди пространа king size кревет, приватно џакузи за потполна релаксација и стилски дневен дел, идеален за уживање во двоец. Гостите се дочекани со шише шампањ од добредојде, во амбиент кој издишува софистицираност и внимателно избрани детали. Уживајте во целосна приватност, луксуз и атмосфера која остава впечаток.",
+          ro: "Experimentați confort și eleganță supreme în această cameră de lux – perfectă pentru momente romantice sau ocazii speciale. Camera include un pat king-size spațios, jacuzzi privat pentru relaxare totală și un living stilat, ideal pentru momente în doi. Oaspeții sunt întâmpinați cu o sticlă de șampanie, într-o ambianță ce emană sofisticare și detalii atent alese. Bucurați-vă de intimitate completă, lux și o atmosferă care lasă impresie."
+        },
+        room11Title: {
+          gb: "Luxury room with jacuzzi, living area and king-size bed",
+          rs: "Luksuzna soba sa đakuzijem, dnevnim boravkom i king size krevetom",
+          de: "Luxuszimmer mit Jacuzzi, Wohnzimmer und Kingsize-Bett",
+          bg: "Луксозна стая с джакузи, дневна и легло King size",
+          mk: "Луксузна соба со џакузи, дневна и king size кревет",
+          ro: "Cameră de lux cu jacuzzi, living și pat king-size"
+        },
+        room11Description: {
+          gb: "Experience ultimate comfort and elegance in this luxury room—perfect for romantic moments or special occasions. The room features a spacious king-size bed, private jacuzzi for full relaxation, and a stylish living area ideal for enjoying time as a couple. Guests are welcomed with a complimentary bottle of champagne, in an ambiance that exudes sophistication and carefully curated details. Enjoy complete privacy, luxury, and an atmosphere that leaves an impression.",
+          rs: "Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.",
+          de: "Erleben Sie ultimativen Komfort und Eleganz in diesem Luxuszimmer – perfekt für romantische Momente oder besondere Anlässe. Das Zimmer verfügt über ein geräumiges Kingsize-Bett, einen privaten Jacuzzi für vollständige Entspannung und einen stilvollen Wohnbereich, ideal zum Verweilen zu zweit. Gäste werden mit einer Flasche Champagner zur Begrüßung empfangen, in einem Ambiente, das Raffinesse und sorgfältig ausgewählte Details ausstrahlt. Genießen Sie vollständige Privatsphäre, Luxus und eine Atmosphäre, die Eindruck hinterlässt.",
+          bg: "Изпитайте върховен комфорт и елегантност в тази луксозна стая — перфектна за романтични моменти или специални поводи. Стаята разполага с просторно легло king-size, частно джакузи за пълна релаксация и стилна дневна зона, идеална за двойки. Гостите са посрещнати с бутилка шампанско като знак на гостоприемство, в атмосфера, изпълнена с изтънченост и внимателно подбрани детайли. Насладете се на пълна поверителност, лукс и атмосфера, която оставя впечатление.",
+          mk: "Искуствувајте врвен комфор и елеганција во оваа луксузна соба – совршена за романтични моменти или посебни прилики. Собата нуди пространа king size кревет, приватно џакузи за потполна релаксација и стилски дневен дел, идеален за уживање во двоец. Гостите се дочекани со шише шампањ од добредојде, во амбиент кој издишува софистицираност и внимателно избрани детали. Уживајте во целосна приватност, луксуз и атмосфера која остава впечаток.",
+          ro: "Experimentați confort și eleganță supreme în această cameră de lux – perfectă pentru momente romantice sau ocazii speciale. Camera include un pat king-size spațios, jacuzzi privat pentru relaxare totală și un living stilat, ideal pentru momente în doi. Oaspeții sunt întâmpinați cu o sticlă de șampanie, într-o ambianță ce emană sofisticare și detalii atent alese. Bucurați-vă de intimitate completă, lux și o atmosferă care lasă impresie."
+        },
+        // ========== FACILITIES ==========
+        facilitiesBadge: {
+          gb: "Facilities",
+          rs: "Sadržaji",
+          de: "Ausstattung",
+          bg: "Удобства",
+          mk: "Содржини",
+          ro: "Facilități"
+        },
+        facilitiesTitle: {
+          gb: "Everything you need",
+          rs: "Sve što vam je potrebno",
+          de: "Alles, was Sie brauchen",
+          bg: "Всичко, от което се нуждаете",
+          mk: "Сè што ви е потребно",
+          ro: "Tot ce aveți nevoie"
+        },
+        facilitiesDescription: {
+          gb: "Modern amenities and services to make your stay comfortable and memorable.",
+          rs: "Savremeni sadržaji i usluge koje će vaš boravak učiniti udobnim i nezaboravnim.",
+          de: "Moderne Annehmlichkeiten und Services für einen komfortablen und unvergesslichen Aufenthalt.",
+          bg: "Модерни удобства и услуги за комфортен и запомнящ се престой.",
+          mk: "Модерни содржини и услуги за удобен и незаборавен престој.",
+          ro: "Facilități și servicii moderne pentru un sejur confortabil și de neuitat."
+        },
+        wifiTitle: {
+          gb: "Free WiFi",
+          rs: "Besplatan WiFi",
+          de: "Kostenloses WLAN",
+          bg: "Безплатен WiFi",
+          mk: "Бесплатен WiFi",
+          ro: "WiFi Gratuit"
+        },
+        wifiDescription: {
+          gb: "High-speed internet throughout the hotel",
+          rs: "Brzi internet dostupan u celom hotelu",
+          de: "Hochgeschwindigkeitsinternet im gesamten Hotel",
+          bg: "Високоскоростен интернет в целия хотел",
+          mk: "Брз интернет низ целиот хотел",
+          ro: "Internet de mare viteză în întregul hotel"
+        },
+        commonAreaTitle: {
+          gb: "Common Area",
+          rs: "Zajednički prostor",
+          de: "Gemeinschaftsraum",
+          bg: "Обща зона",
+          mk: "Заеднички простор",
+          ro: "Zonă comună"
+        },
+        commonAreaDescription: {
+          gb: "Relax and meet other travelers",
+          rs: "Opustite se i upoznajte druge putnike",
+          de: "Entspannen Sie sich und lernen Sie andere Reisende kennen",
+          bg: "Отпуснете се и се запознайте с други пътешественици",
+          mk: "Опуштете се и запознајте други патници",
+          ro: "Relaxați-vă și cunoașteți alți călători"
+        },
+        parkingTitle: {
+          gb: "Parking",
+          rs: "Parking",
+          de: "Parkplatz",
+          bg: "Паркинг",
+          mk: "Паркинг",
+          ro: "Parcare"
+        },
+        parkingDescription: {
+          gb: "Free parking available for guests",
+          rs: "Besplatan parking za goste",
+          de: "Kostenlose Parkplätze für Gäste verfügbar",
+          bg: "Безплатен паркинг за гости",
+          mk: "Бесплатен паркинг за гостите",
+          ro: "Parcare gratuită disponibilă pentru oaspeți"
+        },
+        securityTitle: {
+          gb: "24/7 Security",
+          rs: "Obezbeđenje 24/7",
+          de: "24/7 Sicherheit",
+          bg: "Охрана 24/7",
+          mk: "Обезбедување 24/7",
+          ro: "Securitate 24/7"
+        },
+        securityDescription: {
+          gb: "Safe and secure environment",
+          rs: "Sigurno i bezbedno okruženje",
+          de: "Sichere und geschützte Umgebung",
+          bg: "Сигурна и безопасна среда",
+          mk: "Безбедна и сигурна околина",
+          ro: "Mediu sigur și protejat"
+        },
+        acTitle: {
+          gb: "Air Conditioning",
+          rs: "Klima uređaj",
+          de: "Klimaanlage",
+          bg: "Климатик",
+          mk: "Клима уред",
+          ro: "Aer condiționat"
+        },
+        acDescription: {
+          gb: "Climate controlled rooms",
+          rs: "Sobe sa kontrolisanom temperaturom",
+          de: "Zimmer mit kontrollierter Temperatur",
+          bg: "Стаи с контролирана температура",
+          mk: "Соби со контролирана температура",
+          ro: "Camere cu temperatură controlată"
+        },
+        receptionTitle: {
+          gb: "24/7 Reception",
+          rs: "Recepcija 24/7",
+          de: "Rezeption 24/7",
+          bg: "Рецепция 24/7",
+          mk: "Рецепција 24/7",
+          ro: "Recepție 24/7"
+        },
+        receptionDescription: {
+          gb: "Always here to help you",
+          rs: "Uvek smo tu da vam pomognemo",
+          de: "Wir sind rund um die Uhr für Sie da",
+          bg: "Ние сме винаги на разположение да помогнем",
+          mk: "Секогаш сме тука да ви помогнеме",
+          ro: "Suntem mereu aici pentru a vă ajuta"
+        },
+        // ========== REVIEWS ==========
+        reviewsBadge: {
+          gb: "Reviews",
+          rs: "Recenzije",
+          de: "Bewertungen",
+          bg: "Отзиви",
+          mk: "Осврти",
+          ro: "Recenzii"
+        },
+        reviewsTitle: {
+          gb: "What Our Guests Say",
+          rs: "Šta naši gosti kažu",
+          de: "Was unsere Gäste sagen",
+          bg: "Какво казват нашите гости",
+          mk: "Што велат нашите гости",
+          ro: "Ce spun oaspeții noștri"
+        },
+        // ========== LOCATION ==========
+        locationBadge: {
+          gb: "Location",
+          rs: "Lokacija",
+          de: "Standort",
+          bg: "Локация",
+          mk: "Локација",
+          ro: "Locație"
+        },
+        locationTitle: {
+          gb: "Find Us in the Heart of the City",
+          rs: "Pronađite nas u srcu grada",
+          de: "Finden Sie uns im Herzen der Stadt",
+          bg: "Намерете ни в сърцето на града",
+          mk: "Најдете нè во срцето на градот",
+          ro: "Găsește-ne în inima orașului"
+        },
+        address: {
+          gb: "Address",
+          rs: "Adresa",
+          de: "Adresse",
+          bg: "Адрес",
+          mk: "Адреса",
+          ro: "Adresă"
+        },
+        phone: {
+          gb: "Phone",
+          rs: "Telefon",
+          de: "Telefon",
+          bg: "Телефон",
+          mk: "Телефон",
+          ro: "Telefon"
+        },
+        email: {
+          gb: "Email",
+          rs: "Imejl",
+          de: "E-Mail",
+          bg: "Имейл",
+          mk: "Е-пошта",
+          ro: "Email"
+        },
+        ctaTitle: {
+          gb: "Ready for your next adventure?",
+          rs: "Spremni za svoju sledeću avanturu?",
+          de: "Bereit für Ihr nächstes Abenteuer?",
+          bg: "Готови ли сте за следващото си приключение?",
+          mk: "Подготвени за вашата следна авантура?",
+          ro: "Ești gata pentru următoarea ta aventură?"
+        },
+        ctaDescription: {
+          gb: "Book your stay at Vila Salute today and experience the perfect blend of comfort, community, and convenience.",
+          rs: "Rezervišite svoj boravak u Vili Salute već danas i doživite savršen spoj udobnosti, zajedništva i praktičnosti.",
+          de: "Buchen Sie noch heute Ihren Aufenthalt in der Vila Salute und erleben Sie die perfekte Kombination aus Komfort, Gemeinschaft und Bequemlichkeit.",
+          bg: "Резервирайте престоя си във Вила Салуте още днес и усетете перфектната комбинация от комфорт, общност и удобство.",
+          mk: "Резервирајте го вашиот престој во Вила Салуте уште денес и искусете ја совршената комбинација на удобност, заедништво и практичност.",
+          ro: "Rezervă-ți șederea la Vila Salute astăzi și experimentează combinația perfectă de confort, comunitate și comoditate."
+        },
+        contactUs: {
+          gb: "Contact us",
+          rs: "Kontaktirajte nas",
+          de: "Kontaktieren Sie uns",
+          bg: "Свържете се с нас",
+          mk: "Контактирајте нè",
+          ro: "Contactează-ne"
+        },
+        mapTitle: {
+          gb: "Interactive Map",
+          rs: "Interaktivna mapa",
+          de: "Interaktive Karte",
+          bg: "Интерактивна карта",
+          mk: "Интерактивна мапа",
+          ro: "Hartă interactivă"
+        },
+        mapDescription: {
+          gb: "Click to view our exact location and nearby attractions",
+          rs: "Kliknite da vidite tačnu lokaciju i obližnje atrakcije",
+          de: "Klicken Sie, um unseren genauen Standort und nahegelegene Sehenswürdigkeiten zu sehen",
+          bg: "Кликнете, за да видите точното ни местоположение и близките забележителности",
+          mk: "Кликнете за да ја видите нашата точна локација и блиските атракции",
+          ro: "Apasă pentru a vedea locația exactă și atracțiile din apropiere"
+        },
+        viewOnMap: {
+          gb: "View on Map",
+          rs: "Pogledaj na mapi",
+          de: "Auf Karte anzeigen",
+          bg: "Виж на картата",
+          mk: "Погледни на мапа",
+          ro: "Vezi pe hartă"
+        },
+        // ========== FOOTER ==========
+        footerDescription: {
+          gb: "Your home away from home in the heart of the city.",
+          rs: "Vaš dom daleko od kuće, u srcu grada.",
+          de: "Ihr Zuhause fern von Zuhause im Herzen der Stadt.",
+          bg: "Вашият дом далеч от дома в сърцето на града.",
+          mk: "Вашиот дом далеку од дома, во срцето на градот.",
+          ro: "Casa ta departe de casă, în inima orașului."
+        },
+        quickLinks: {
+          gb: "Quick Links",
+          rs: "Brzi linkovi",
+          de: "Schnellzugriff",
+          bg: "Бързи връзки",
+          mk: "Брзи линкови",
+          ro: "Linkuri rapide"
+        },
+        services: {
+          gb: "Services",
+          rs: "Usluge",
+          de: "Dienstleistungen",
+          bg: "Услуги",
+          mk: "Услуги",
+          ro: "Servicii"
+        },
+        contactInfo: {
+          gb: "Contact Info",
+          rs: "Kontakt informacije",
+          de: "Kontaktinformationen",
+          bg: "Информация за контакт",
+          mk: "Контакт информации",
+          ro: "Informații de contact"
+        },
+        allRightsReserved: {
+          gb: "All rights reserved.",
+          rs: "Sva prava zadržana.",
+          de: "Alle Rechte vorbehalten.",
+          bg: "Всички права запазени.",
+          mk: "Сите права се задржани.",
+          ro: "Toate drepturile rezervate."
+        }
+      };
+
+
+      function openRoomDialog(room) {
+        const roomsLength = {
+          "1": 5,
+          "2": 5,
+          "3": 6,
+          "4": 4,
+          "5": 4,
+          "6": 2,
+          "7": 5,
+          "8": 6,
+          "9": 13,
+          "10": 6,
+          "11": 9
+        };
+
+        const imgs = [];
+
+        for (let i = 1; i <= roomsLength[room]; i += 1) {
+          imgs.push(`./rooms/${room}/${i}.webp`);
+        }
+
+        const thumbnailsContainer = document.getElementById("thumbnails");
+        const mainImage = document.getElementById("mainImage");
+        const roomModalTitle = document.getElementById("roomModalTitle");
+        const roomModalDescription = document.getElementById("roomModalDescription");
+
+        mainImage.src = imgs[0];
+
+        roomModalTitle.innerText = translations[`room${room}Title`][currentLang];
+        roomModalDescription.innerText = translations[`room${room}Description`][currentLang];
+
+        imgs.forEach((src, index) => {
+          const thumb = document.createElement("img");
+          thumb.src = src;
+          thumb.className = "thumbnail" + (index === 0 ? " active" : ""); // default active image
+          thumb.onclick = () => {
+            mainImage.src = src;
+            document.querySelectorAll(".thumbnail").forEach(el => el.classList.remove("active"));
+            thumb.classList.add("active");
+          };
+          thumbnailsContainer.appendChild(thumb);
+        });
+
+        const modal = document.getElementById("roomModal");
+
+        modal.style.display = "flex";
+      }
+
+      function closeRoomModal() {
+        const modal = document.getElementById("roomModal");
+        const thumbnailsContainer = document.getElementById("thumbnails");
+
+        modal.style.display = "none";
+        thumbnailsContainer.innerHTML = "";
+      }
+
+      function toggleLangMenu() {
+        const menu = document.getElementById("lang-options");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+      }
+
+      function setLang(lang, shouldClose = false) {
+        currentLang = lang;
+        localStorage.setItem("language", lang);
+        document.getElementById("lang-options").style.display = "none";
+
+        const selected = document.getElementById("lang-selected");
+        selected.innerHTML = `${flagMap[lang].emoji} <img src="${flagMap[lang].img}" alt="${lang.toUpperCase()}">`;
+
+        for (const key in translations) {
+          const elements = document.querySelectorAll(
+            `[data-translate="${key}"]`
+          );
+
+          if (!elements.length) { continue; }
+
+          for (const element of elements) {
+            element.innerText = translations[key][lang];
+          }
+        }
+
+        if (shouldClose) {toggleLangMenu();}
+      }
+
+      function openModal() {
+        const modal = document.getElementById("videoModal");
+        const video = document.getElementById("modalVideo");
+        const videoSrc = document.getElementById("videoSrc");
+
+        video.src = `./videos/${currentLang}.mp4`;
+        modal.style.display = "flex";
+        // videoSrc.src = `./videos/${currentLang}.mp4`;
+        // video.play();
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("videoModal");
+        const video = document.getElementById("modalVideo");
+
+        modal.style.display = "none";
+        video.pause();
+        video.currentTime = 0;
+      }
+
+      function onViewMap() {
+        const map = document.getElementById("map");
+        const viewMap = document.getElementById("viewMap");
+
+        map.style.display = "initial";
+        viewMap.style.display = "none";
+      }
+
+      window.onload = () => {
+        const savedLang = localStorage.getItem("language") || "en";
+        setLang(savedLang);
+
+
+
+        const images = Array.from(document.querySelectorAll('.myimg'));
+        const progressBar = document.getElementById('progressBar');
+        let current = 0;
+        let interval;
+        const intervalDuration = 5000;
+
+        function shuffleImages() {
+          for (let i = images.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [images[i].src, images[j].src] = [images[j].src, images[i].src];
+          }
+        }
+
+        function showImage(index) {
+          images.forEach((img, i) => {
+            img.classList.toggle('active', i === index);
+          });
+          current = index;
+          resetProgressBar();
+        }
+
+        function nextImage() {
+          showImage((current + 1) % images.length);
+        }
+
+        function prevImage() {
+          showImage((current - 1 + images.length) % images.length);
+        }
+
+        function startAutoSlide() {
+          interval = setInterval(() => {
+            nextImage();
+          }, intervalDuration);
+          startProgressBar();
+        }
+
+        function resetTimer() {
+          clearInterval(interval);
+          startAutoSlide();
+        }
+
+        function resetProgressBar() {
+          progressBar.style.transition = 'none';
+          progressBar.style.width = '0%';
+          startProgressBar();
+          // requestAnimationFrame(() => {
+          //   progressBar.style.transition = `width ${intervalDuration}ms linear`;
+          //   progressBar.style.width = '100%';
+          // });
+        }
+
+        function startProgressBar() {
+          progressBar.style.transition = `width ${intervalDuration}ms linear`;
+          progressBar.style.width = '100%';
+        }
+
+        document.querySelector('.left').addEventListener('click', () => {
+          prevImage();
+          resetTimer();
+        });
+
+        document.querySelector('.right').addEventListener('click', () => {
+          nextImage();
+          resetTimer();
+        });
+
+        shuffleImages();
+        showImage(0);
+        startAutoSlide();
+
+
+        // const imgs = [
+        //   "https://picsum.photos/id/1005/800/450",
+        //   "https://picsum.photos/id/1011/800/450",
+        //   "https://picsum.photos/id/1015/800/450",
+        //   "https://picsum.photos/id/1016/800/450",
+        //   "https://picsum.photos/id/1025/800/450",
+        //   "https://picsum.photos/id/1031/800/450",
+        //   "https://picsum.photos/id/1043/800/450",
+        //   "https://picsum.photos/id/1050/800/450"
+        // ];
+
+        // const thumbnailsContainer = document.getElementById("thumbnails");
+        // const mainImage = document.getElementById("mainImage");
+
+        // imgs.forEach((src, index) => {
+        //   const thumb = document.createElement("img");
+        //   thumb.src = src;
+        //   thumb.className = "thumbnail" + (index === 2 ? " active" : ""); // default active image
+        //   thumb.onclick = () => {
+        //     mainImage.src = src;
+        //     document.querySelectorAll(".thumbnail").forEach(el => el.classList.remove("active"));
+        //     thumb.classList.add("active");
+        //   };
+        //   thumbnailsContainer.appendChild(thumb);
+        // });
+      };
+    </script>
+
+    <title>Vila Salute</title>
+  </head>
+
+  <body>
+
+    <div class="header-wrapper">
+      <header class="header">
+
+        <div class="header__main">
+          <img class="header__main__logo" src="./logo.png" alt="Logo"/>
+          <div data-translate="title">Villa Salute</div>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+              <a href="#about" data-translate="aboutLink">About</a>
+            </li>
+            <li>
+              <a href="#rooms" data-translate="roomsLink">Rooms</a>
+            </li>
+            <li>
+              <a href="#amenities" data-translate="amenitiesLink">Amenities</a>
+            </li>
+            <li>
+              <a href="#location" data-translate="locationLink">Location</a>
+            </li>
+            <li>
+              <a href="#contact" data-translate="contactLink">Contact</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div>
+          <a href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank">
+          <button class="nav-btn" data-translate="bookNow">Book Now</button></a>
+          <div class="lang-menu" onclick="toggleLangMenu()">
+            <div class="lang-selected" id="lang-selected">
+              🇬🇧 <img src="./flags/gb.svg" alt="GB" loading="lazy"/>
+            </div>
+            <div class="lang-options" id="lang-options">
+              <div onclick="setLang('gb', true)">🇬🇧 <img height="16" src="./flags/gb.svg" alt="GB" loading="lazy"></div>
+              <div onclick="setLang('rs', true)">🇷🇸 <img height="16" src="./flags/rs.svg" alt="RS" loading="lazy"></div>
+              <div onclick="setLang('de', true)">🇩🇪 <img height="16" src="./flags/de.svg" alt="DE" loading="lazy"></div>
+              <div onclick="setLang('bg', true)">🇧🇬 <img height="16" src="./flags/bg.svg" alt="BG" loading="lazy"></div>
+              <div onclick="setLang('mk', true)">🇲🇰 <img height="16" src="./flags/mk.svg" alt="MK" loading="lazy"></div>
+              <div onclick="setLang('ro', true)">🇷🇴 <img height="16" src="./flags/ro.svg" alt="RO" loading="lazy"></div>
+            </div>
+          </div>
+        </div>
+
+      </header>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero--inner">
+
+        <h1 data-translate="heroTitle">Welcome to Vila Salute</h1>
+
+        <p data-translate="heroDescription">
+          Your home away from home. Experience comfort, community, and adventure in the heart of the city.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn-primary" href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank"><button style="all: unset" data-translate="bookYourStay">
+            Book Your Stay
+          </button></a>
+          <button
+            class="btn btn-outline"
+            data-translate="takeTour"
+            onclick="openModal()">
+            Take a Tour
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="modal" id="videoModal">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal()">&times;</button>
+        <video id="modalVideo" controls>
+          <source id="videoSrc" src="./videos/gb.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="about-grid grid">
+
+        <div>
+          <div class="badge" data-translate="aboutBadge">About Us</div>
+
+          <h2 data-translate="aboutTitle">More Than Just a Place to Sleep</h2>
+
+          <p class="text-muted" data-translate="aboutDescription">
+            Vila Salute is a modern hotel designed for travelers who value comfort, cleanliness, and community.
+            Located in the vibrant heart of the city, we offer the perfect base for exploring local attractions,
+            meeting fellow travelers, and creating unforgettable memories.
+          </p>
+
+          <div class="about-stats text-muted">
+            <div class="about-stat">
+              <div class="about-stat__number">150+</div>
+              <span data-translate="happyGuests">Happy Guests</span>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat__number">4.8</div>
+              <span data-translate="rating">Rating</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel">
+          <!-- <button  > -->
+            <img class="arrow left" src="./icons/caret-left.svg" alt="go left" onclick="prevImage()"/>
+          <!-- </button> -->
+          <!-- <button  > -->
+            <img class="arrow right" src="./icons/caret-right.svg" alt="go right" onclick="nextImage()"/>
+          <!-- </button> -->
+          <div class="progress" id="progressBar"></div>
+          <img class="myimg" src="./rooms/1/1.webp" class="active" alt="Image 1" loading="lazy">
+          <img class="myimg" src="./rooms/2/1.webp" alt="Image 2" loading="lazy">
+          <img class="myimg" src="./rooms/3/1.webp" alt="Image 3" loading="lazy">
+          <img class="myimg" src="./rooms/4/1.webp" alt="Image 4" loading="lazy">
+          <img class="myimg" src="./rooms/5/1.webp" alt="Image 5" loading="lazy">
+          <img class="myimg" src="./rooms/6/1.webp" alt="Image 6" loading="lazy">
+          <img class="myimg" src="./rooms/7/1.webp" alt="Image 7" loading="lazy">
+          <img class="myimg" src="./rooms/8/1.webp" alt="Image 8" loading="lazy">
+          <img class="myimg" src="./rooms/9/1.webp" alt="Image 9" loading="lazy">
+          <img class="myimg" src="./rooms/10/1.webp" alt="Image 10" loading="lazy">
+          <img class="myimg" src="./rooms/11/1.webp" alt="Image 11" loading="lazy">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="section" id="rooms" style="background: #f9fafb;">
+      <div class="rooms-grid grid">
+
+        <div class="section-title" style="grid-column: 1 / -1;">
+          <div class="badge" data-translate="accommodationBadge">Accommodation</div>
+          <h2 data-translate="accommodationTitle">Choose Your Perfect Room</h2>
+          <p class="text-muted" data-translate="accommodationDescription">
+            From budget-friendly dorms to private rooms, we have options for every traveler
+          </p>
+        </div>
+
+        <!-- 1 -->
+        <div class="room-card">
+          <img src="./rooms/1/1.webp" alt="Family room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room1Title">
+                Family room with 5 beds and private bathroom
+              </h3>
+              <div class="room-price">€50</div>
+            </div>
+            <!-- <p class="room-desc" data-translate="room1Description">
+              Perfect for larger families or a group of friends, this spacious room offers a total of 5 beds – two bunk beds and a comfortable single bed. Tastefully designed for maximum comfort and functionality, guests have a private bathroom equipped with all essentials for a pleasant stay. Ideal for those seeking practicality, comfort, and privacy in one place.
+            </p> -->
+            <div class="room-details">
+              <span>5 people</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('1')">Details</button>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="room-card">
+          <img src="./rooms/2/1.webp" alt="Twin room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room2Title">Twin room with separate single beds</h3>
+              <div class="room-price">€28</div>
+            </div>
+            <!-- <p class="room-desc">Savršen izbor za prijatelje, kolege ili putnike koji žele sopstveni prostor za odmor. Ova udobna dvokrevetna soba nudi dva odvojena single ležaja, pažljivo raspoređena kako bi se obezbedio komfor i privatnost. Soba je svetla, uredna i funkcionalno opremljena, uz pristup svim neophodnim sadržajima za prijatan boravak.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('2')">Details</button>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="room-card">
+          <img src="./rooms/3/1.webp" alt="Twin room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room3Title">Twin room with separate single beds</h3>
+              <div class="room-price">€28</div>
+            </div>
+            <!-- <p class="room-desc">Savršen izbor za prijatelje, kolege ili putnike koji žele sopstveni prostor za odmor. Ova udobna dvokrevetna soba nudi dva odvojena single ležaja, pažljivo raspoređena kako bi se obezbedio komfor i privatnost. Soba je svetla, uredna i funkcionalno opremljena, uz pristup svim neophodnim sadržajima za prijatan boravak.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('3')">Details</button>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="room-card">
+          <img src="./rooms/4/1.webp" alt="Triple room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room4Title">Triple room with double and single bed</h3>
+              <div class="room-price">€33</div>
+            </div>
+            <!-- <p class="room-desc">Ova udobna i funkcionalna soba idealna je za porodicu, par sa detetom ili troje putnika. Nudi jedan francuski ležaj (bračni krevet) i jedan single ležaj, pružajući dovoljno prostora za prijatan i miran odmor. Soba je moderno uređena, klimatizovana i poseduje sve što vam je potrebno za komforan boravak.</p> -->
+            <div class="room-details">
+              <span>3 people</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('4')">Details</button>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div class="room-card">
+          <img src="./rooms/5/1.webp" alt="Triple room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room5Title">Triple room with double and single bed</h3>
+              <div class="room-price">€33</div>
+            </div>
+            <!-- <p class="room-desc">Ova udobna i funkcionalna soba idealna je za porodicu, par sa detetom ili troje putnika. Nudi jedan francuski ležaj (bračni krevet) i jedan single ležaj, pružajući dovoljno prostora za prijatan i miran odmor. Soba je moderno uređena, klimatizovana i poseduje sve što vam je potrebno za komforan boravak.</p> -->
+            <div class="room-details">
+              <span>3 people</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('5')">Details</button>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="room-card">
+          <img src="./rooms/6/1.webp" alt="Romantic double room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room6Title">Romantic double room with queen bed and balcony</h3>
+              <div class="room-price">€38</div>
+            </div>
+            <!-- <p class="room-desc">Savršen izbor za parove koji traže mir, udobnost i prijatan ambijent. Soba sadrži prostran francuski ležaj, idealan za opuštanje i uživanje u dvoje. Privatni balkon omogućava gostima da uživaju u jutarnjoj kafi ili večernjem zalasku sunca na svežem vazduhu. Pažljivo uređena u toplim tonovima, soba pruža osećaj privatnosti i komfora, pogodna kako za kraći boravak, tako i za duže opuštanje. Uživajte u prijatnom ambijentu i svim pogodnostima koje su vam na raspolaganju.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Balcony</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('6')">Details</button>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div class="room-card">
+          <img src="./rooms/7/1.webp" alt="Luxury room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room7Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+              <div class="room-price">€50</div>
+            </div>
+            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Jacuzzi</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('7')">Details</button>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="room-card">
+          <img src="./rooms/8/1.webp" alt="Luxury room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room8Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+              <div class="room-price">€50</div>
+            </div>
+            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Jacuzzi</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('8')">Details</button>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div class="room-card">
+          <img src="./rooms/9/1.webp" alt="Luxury room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room9Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+              <div class="room-price">€60</div>
+            </div>
+            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Jacuzzi</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('9')">Details</button>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div class="room-card">
+          <img src="./rooms/10/1.webp" alt="Luxury room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room10Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+              <div class="room-price">€50</div>
+            </div>
+
+            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Jacuzzi</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('10')">Details</button>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div class="room-card">
+          <img src="./rooms/11/1.webp" alt="Luxury room" loading="lazy">
+          <div class="room-card-body">
+            <div class="room-card-body__title">
+              <h3 data-translate="room11Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+              <div class="room-price">€60</div>
+            </div>
+
+            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
+            <div class="room-details">
+              <span>2 people</span>
+              <span>Jacuzzi</span>
+              <span>Private bath</span>
+            </div>
+            <button class="room-btn" data-translate="details" onclick="openRoomDialog('11')">Details</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="modal" id="roomModal">
+      <div class="modal-content-room">
+        <button class="close" onclick="closeRoomModal()">&times;</button>
+        <div class="carousel-room">
+          <img id="mainImage" class="main-image" alt="Main Image" loading="lazy">
+          <div class="thumbnails" id="thumbnails"></div>
+          <div class="carousel-room__content">
+            <h3 id="roomModalTitle">Mnogo jaka soba</h3>
+            <p id="roomModalDescription">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ipsum ex nisi blanditiis nemo voluptatem repellat, fuga ratione deserunt quos omnis esse molestiae id quisquam, maxime cupiditate ut distinctio voluptates?</p>
+            <div class="carousel-room__content__actions">
+              <a href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank"><button class="btn btn-primary" data-translate="bookNow">
+                Book Now
+              </button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amenities Section -->
+    <section class="section" id="amenities">
+
+      <div class="section-title">
+        <div class="badge" data-translate="facilitiesBadge">Facilities</div>
+        <h2 data-translate="facilitiesTitle">Everything you need</h2>
+        <p class="text-muted" data-translate="facilitiesDescription">
+          Modern amenities and services to make your stay comfortable and memorable.
+        </p>
+      </div>
+
+      <div class="amenities-grid grid">
+        <div class="amenity">
+          <div class="amenity-icon"><img src="./icons/wifi-high.svg" loading="lazy"/></div>
+          <h3 data-translate="wifiTitle">Free WiFi</h3>
+          <p class="text-muted" data-translate="wifiDescription">
+            High-speed internet throughout the hotel
+          </p>
+        </div>
+        <div class="amenity">
+          <div class="amenity-icon"><img src="./icons/coffee.svg" loading="lazy"/></div>
+          <h3 data-translate="commonAreaTitle">Common Area</h3>
+          <p class="text-muted" data-translate="commonAreaDescription">
+            Relax and meet other travelers
+          </p>
+        </div>
+        <div class="amenity">
+          <div class="amenity-icon"><img src="./icons/car-profile.svg" loading="lazy"/></div>
+          <h3 data-translate="parkingTitle">Parking</h3>
+          <p class="text-muted" data-translate="parkingDescription">
+            Free parking available for guests
+          </p>
+        </div>
+        <div class="amenity">
+          <div class="amenity-icon"><img src="./icons/shield.svg" loading="lazy"/></div>
+          <h3 data-translate="securityTitle">24/7 Security</h3>
+          <p class="text-muted" data-translate="securityDescription">
+            Safe and secure environment
+          </p>
+        </div>
+        <div class="amenity">
+          <div class="amenity-icon"><img src="./icons/snowflake.svg" loading="lazy"/></div>
+          <h3 data-translate="acTitle">Air Conditioning</h3>
+          <p class="text-muted" data-translate="acDescription">
+            Climate controlled rooms
+          </p>
+        </div>
+        <div class="amenity">
+          <div class="amenity-icon"><img src="./icons/clock.svg" loading="lazy"/></div>
+          <h3 data-translate="receptionTitle">24/7 Reception</h3>
+          <p class="text-muted" data-translate="receptionDescription">
+            Always here to help you
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="section" style="background: #f9fafb;">
+      <div class="section-title">
+        <div class="badge" data-translate="reviewsBadge">Reviews</div>
+        <h2 data-translate="reviewsTitle">What Our Guests Say</h2>
+      </div>
+
+      <div class="review-grid grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "More than correct accommodation, friendly staff, clean, warm. For every recommendation."
+          </p>
+          <div class="reviewer-name">Goran</div>
+          <div class="reviewer-meta">Serbia</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "Very nice service. Location close to the highway. Easy access. Rooms clean and tidy. I recommend it with all my heart"
+          </p>
+          <div class="reviewer-name">Andrzej</div>
+          <div class="reviewer-meta">Poland</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">
+            "We had a night check-in, 24-hour reception, no problems, very nice and friendly staff, the hotel is in an easily accessible and convenient location, its own parking, the room is spacious, with all the amenities, clean, beautiful and modern design, good Wi-Fi, check-out until 14-00. We will stay on our next trip, thank you for your hospitality!"
+          </p>
+          <div class="reviewer-name">Tatiana</div>
+          <div class="reviewer-meta">Bulgaria</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="section" id="location">
+      <div class="location-grid grid">
+        <div>
+          <div class="badge" data-translate="locationBadge">Location</div>
+          <h2 data-translate="locationTitle">
+            Find Us in the Heart of the City
+          </h2>
+
+          <div class="location-detail">
+            <div class="location-detail-icon"><img src="./icons/map-pin.svg" loading="lazy"/></div>
+            <div class="location-info">
+              <h3 data-translate="address">Address</h3>
+              <p class="text-muted">
+                <a href="https://g.co/kgs/uCFGCev" target="_blank">Dimitrija Tucovića 153<br>
+                18000 Niš, Serbia</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="location-detail">
+            <div class="location-detail-icon">
+              <img src="./icons/phone.svg" loading="lazy"/>
+            </div>
+            <div class="location-info">
+              <h3 data-translate="phone">Phone</h3>
+              <p class="text-muted"><a href="tel:+38118262490">+381 18 262 490</a><br/><a href="tel:+381658998969">+381 65 899 8969</a></p>
+            </div>
+          </div>
+
+          <div class="location-detail">
+            <div class="location-detail-icon"><img src="./icons/envelope-simple.svg" loading="lazy"/></div>
+            <div class="location-info">
+              <h3 data-translate="email">Email</h3>
+              <p class="text-muted"><a href="mailto:vilasalutelux@gmail.com">
+vilasalutelux@gmail.com</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-box" style="display: none;" id="map">
+          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1726.0931258324426!2d21.856066282766484!3d43.3157029185788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4755b761bbe5dd07%3A0xe92370c1ade9be39!2sDimitrija%20Tucovi%C4%87a%20153%2C%20Ni%C5%A1!5e0!3m2!1sen!2srs!4v1750707399183!5m2!1sen!2srs" width="512" height="288" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="mapFrame"></iframe> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!4v1751062877233!6m8!1m7!1scGO4pkGoBlLQ0Fnbbd5snQ!2m2!1d43.31596440051143!2d21.85789875588952!3f181.91!4f-12.530000000000001!5f0.7820865974627469" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="map-box" id="viewMap">
+          <img src="./icons/map-pin.svg" height="64" loading="lazy">
+          <h3 style="margin: 1rem 0 0.5rem;" data-translate="mapTitle">Interactive Map</h3>
+          <p class="text-muted" data-translate="mapDescription">Click to view our exact location and nearby attractions</p>
+          <div>
+            <button
+              class="btn-map"
+              data-translate="viewOnMap"
+              onclick="onViewMap()">
+              View on Map
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+      <h2 data-translate="ctaTitle">Ready for Your Next Adventure?</h2>
+      <p style="opacity: 0.9; max-width: 600px; margin: 1rem auto;" data-translate="ctaDescription">
+        Book your stay at Vila Salute today and experience the perfect blend of comfort, community, and convenience.
+      </p>
+      <div class="cta-buttons">
+        <!-- <button class="btn primary" data-translate="bookNow"> -->
+          <a class="primary" data-translate="bookNow" href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank">Book Now</a>
+        <!-- </button> -->
+        <a href="mailto:vilasalutelux@gmail.com" class="outline" data-translate="contactUs">Contact Us</a>
+        <!-- <button class="outline" data-translate="contactUs">Contact Us</button> -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-grid">
+
+        <div class="footer-logo">
+          <div data-translate="title">Vila Salute</div>
+          <p class="text-muted" data-translate="footerDescription">
+            Your home away from home in the heart of the city.
+          </p>
+        </div>
+
+        <div class="text-muted footer__links">
+          <h3 class="text-black" data-translate="quickLinks">Quick Links</h3>
+          <a href="#about" data-translate="aboutLink">About</a>
+          <a href="#rooms" data-translate="roomsLink">Rooms</a>
+          <a href="#amenities" data-translate="amenitiesLink">Amenities</a>
+          <a href="#location" data-translate="locationLink">Location</a>
+          <a href="#contact" data-translate="contactLink">Contact</a>
+        </div>
+
+        <div class="text-muted footer__links">
+          <h3 class="text-black" data-translate="services">Services</h3>
+          <div>24/7 Reception</div>
+          <div>Luggage Storage</div>
+          <div>Tour Booking</div>
+          <div>Airport Transfer</div>
+        </div>
+
+        <div class="text-muted footer__links">
+          <h3 class="text-black" data-translate="contactInfo">Contact Info</h3>
+          <div>Dimitrija Tucovića 153</div>
+          <div>18000 Niš, Serbia</div>
+          <div><a href="tel:+38118262490">+381 18 262 490</a></div>
+          <div><a href="tel:+381658998969">+381 65 899 8969</a></div>
+          <div><a href="mailto:vilasalutelux@gmail.com">vilasalutelux@gmail.com</a></div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        © <script>document.write(new Date().getFullYear())</script>
+        Vila Salute.
+        <span data-translate="allRightsReserved">All rights reserved.</span>
+      </div>
+    </footer>
+
+  </body>
+
+</html>
