@@ -4,803 +4,854 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font -->
+    <title>Vila Salute — Guest House in Niš, Serbia</title>
+    <meta name="description" content="Vila Salute is a modern guest house in the heart of Niš, Serbia — comfortable rooms, private baths, free parking and 24/7 reception. Book your stay today.">
+    <meta name="theme-color" content="#FBF7EF">
+    <link rel="icon" href="./logo.png">
+
+    <!-- Fonts: Fraunces (display serif) + Nunito Sans (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Inter:opsz@14..32&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..800;1,9..144,400..600&family=Nunito+Sans:opsz,wght@6..12,300..800&display=swap" rel="stylesheet">
 
     <style>
+      /* ===================================================================
+         DESIGN TOKENS
+      =================================================================== */
       :root {
-        --primary: #18181B;
-        /* --primary: #000000; */
-        /* --primary: #3b82f6; */
-        --bg: #ffffff;
-        --text: #111827;
-        --muted: #6b7280;
-        --white: #ffffff;
+        /* Surfaces */
+        --paper: #FBF7EF;      /* warm ivory page */
+        --paper-2: #F4ECDE;    /* deeper warm surface (alt sections) */
+        --surface: #FFFFFF;    /* cards */
+
+        /* Ink & text */
+        --ink: #211C18;        /* warm near-black */
+        --ink-2: #4B4139;
+        --muted: #8C8073;      /* warm taupe */
+
+        /* Accents */
+        --clay: #BC6C4C;       /* terracotta */
+        --clay-2: #9E5334;     /* terracotta, darker (hover) */
+        --sage: #6E7A5E;
+        --gold: #CB9A3E;
+
+        /* Lines */
+        --line: #E7DBC9;
+        --line-2: #EFE7DA;
+
+        /* Effects */
+        --shadow: 0 1px 2px rgba(33, 28, 24, .04), 0 10px 30px -16px rgba(33, 28, 24, .22);
+        --shadow-lg: 0 30px 70px -30px rgba(33, 28, 24, .45);
+        --radius: 16px;
+        --radius-sm: 10px;
+        --maxw: 1180px;
+
+        --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+        --font-body: "Nunito Sans", system-ui, -apple-system, sans-serif;
       }
 
-      .text-black { color: black; }
-      .text-muted { color: var(--muted); }
+      /* ===================================================================
+         RESET & BASE
+      =================================================================== */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
       body {
-        height: 100%;
-        font-family: "Nunito Sans", system-ui, sans-serif;
-        line-height: 1;
+        font-family: var(--font-body);
         font-size: 16px;
-        background: var(--bg);
-        color: var(--text);
+        line-height: 1.65;
+        color: var(--ink);
+        background: var(--paper);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
       }
 
-      h1 {
-        margin-bottom: 1.25em;
-        font-size: 2.5rem;
-        font-weight: 700;
+      /* Subtle warm grain over the whole page */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: .04;
+        mix-blend-mode: multiply;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       }
 
-      h2 {
-        margin-bottom: 1em;
-        font-size: 2rem;
+      img { display: block; max-width: 100%; }
+
+      a { color: inherit; text-decoration: none; }
+
+      h1, h2, h3, h4 {
+        font-family: var(--font-display);
+        font-optical-sizing: auto;
         font-weight: 600;
+        line-height: 1.1;
+        letter-spacing: -.015em;
+        color: var(--ink);
+      }
+      h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1.02; letter-spacing: -.025em; }
+      h2 { font-size: clamp(1.9rem, 4vw, 2.9rem); }
+      h3 { font-size: 1.2rem; letter-spacing: -.01em; }
+
+      p { color: var(--ink-2); }
+
+      ::selection { background: var(--clay); color: var(--paper); }
+
+      :focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; border-radius: 4px; }
+
+      /* ===================================================================
+         LAYOUT HELPERS
+      =================================================================== */
+      .container {
+        width: 100%;
+        max-width: var(--maxw);
+        margin-inline: auto;
+        padding-inline: clamp(1.25rem, 4vw, 2.5rem);
       }
 
-      h3 {
-        margin-bottom: 0.75em;
-        font-size: 1.5rem;
-        font-weight: 500;
-      }
-
-      p {
-        margin-bottom: 1em;
-        font-size: 1rem;
-        line-height: 1.5;
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      nav {
-        display: none;
-        font-size: 1rem;
-      }
-
-      ul {
-        display: flex;
-        gap: 1em;
-        list-style-type: none;
-      }
+      .section { padding: clamp(4rem, 8vw, 7rem) 0; position: relative; }
+      .section--alt { background: var(--paper-2); }
 
       .badge {
-        margin-bottom: 0.8em;
-        padding: 0.33rem 0.66rem;
-        display: inline-block;
-        background: var(--primary);
-        border-radius: 256px;
-        color: white;
-        font-size: 0.8rem;
+        display: inline-flex;
+        align-items: center;
+        gap: .6rem;
+        margin-bottom: 1.1rem;
+        font-size: .72rem;
+        font-weight: 700;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: var(--clay);
+      }
+      .badge::before {
+        content: "";
+        width: 26px;
+        height: 1px;
+        background: currentColor;
+        opacity: .55;
       }
 
-      /* ========== HEADER ========== */
-      .header-wrapper {
+      .lead-muted {
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.7;
+      }
+
+      .section-head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+      }
+      .section-head .badge { justify-content: center; }
+      .section-head h2 { margin-bottom: .9rem; }
+
+      /* ===================================================================
+         BUTTONS
+      =================================================================== */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        padding: .8rem 1.5rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        font-family: var(--font-body);
+        font-size: .92rem;
+        font-weight: 700;
+        letter-spacing: .01em;
+        line-height: 1;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: transform .25s ease, background .25s ease, color .25s ease,
+                    border-color .25s ease, box-shadow .25s ease;
+      }
+      .btn:hover { transform: translateY(-2px); }
+      .btn:active { transform: translateY(0); }
+
+      .btn--sm { padding: .55rem 1.1rem; font-size: .85rem; }
+      .btn--lg { padding: .95rem 2rem; font-size: 1rem; }
+      .btn--block { width: 100%; }
+
+      .btn--primary { background: var(--clay); color: var(--paper); box-shadow: 0 10px 24px -14px var(--clay-2); }
+      .btn--primary:hover { background: var(--clay-2); box-shadow: 0 16px 30px -14px var(--clay-2); }
+
+      .btn--outline { background: transparent; color: var(--ink); border-color: var(--line); }
+      .btn--outline:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+
+      .btn--light { background: var(--paper); color: var(--ink); }
+      .btn--light:hover { background: #fff; box-shadow: var(--shadow); }
+
+      .btn--ghost-light { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .55); }
+      .btn--ghost-light:hover { background: rgba(255, 255, 255, .12); border-color: #fff; }
+
+      /* ===================================================================
+         HEADER
+      =================================================================== */
+      .site-header {
         position: sticky;
         top: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.333);
-        backdrop-filter: blur(16px);
-        border-bottom: 1px solid #e5e7eb;
-        z-index: 1;
+        z-index: 50;
+        background: rgba(251, 247, 239, .72);
+        backdrop-filter: blur(14px) saturate(1.4);
+        -webkit-backdrop-filter: blur(14px) saturate(1.4);
+        border-bottom: 1px solid transparent;
+        transition: border-color .3s ease, background .3s ease;
       }
-
-      .header {
-        padding: 1em;
-        width: 100%;
-        height: 64px;
+      .site-header.is-scrolled {
+        border-bottom-color: var(--line);
+        background: rgba(251, 247, 239, .88);
+      }
+      .site-header__inner {
+        height: 72px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 1rem;
+      }
+      .brand { display: flex; align-items: center; gap: .7rem; }
+      .brand__logo { height: 38px; width: 38px; object-fit: contain; }
+      .brand__name {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: -.01em;
       }
 
-      .header__main {
+      .site-nav { display: none; }
+      .site-nav ul { display: flex; align-items: center; gap: 2rem; list-style: none; }
+      .site-nav a {
+        position: relative;
+        font-size: .95rem;
+        font-weight: 600;
+        color: var(--ink-2);
+        padding: .25rem 0;
+        transition: color .2s ease;
+      }
+      .site-nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 100%;
+        height: 1.5px;
+        background: var(--clay);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .3s ease;
+      }
+      .site-nav a:hover { color: var(--ink); }
+      .site-nav a:hover::after { transform: scaleX(1); }
+
+      .site-header__actions { display: flex; align-items: center; gap: .75rem; }
+
+      /* Language switcher */
+      .lang-menu { position: relative; cursor: pointer; user-select: none; }
+      .lang-selected {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        padding: .5rem .7rem;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: .85rem;
+        font-weight: 700;
+        transition: border-color .2s ease;
+      }
+      .lang-selected:hover { border-color: var(--clay); }
+      .lang-selected img { width: 20px; height: 14px; object-fit: cover; border-radius: 3px; }
+      .lang-options {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        min-width: 84px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        z-index: 60;
+      }
+      .lang-options div {
         display: flex;
         align-items: center;
-        gap: 1em;
-        font-size: 1.25rem;
-        font-weight: bold;
+        gap: .5rem;
+        padding: .55rem .7rem;
+        font-size: .9rem;
+        font-weight: 600;
+        transition: background .15s ease;
       }
+      .lang-options div:hover { background: var(--paper-2); }
+      .lang-options img { width: 20px; height: 14px; object-fit: cover; border-radius: 3px; }
 
-      .header__main__logo {
-        height: 32px;
-        width: 32px;
-      }
-
-      /* ========== HERO SECTION ========== */
+      /* ===================================================================
+         HERO
+      =================================================================== */
       .hero {
         position: relative;
-        height: 66.66vh;
+        min-height: 90vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url("./hero.webp");
-        background-size: cover;
-        background-position: center;
-        color: white;
+        text-align: center;
+        color: #fff;
+        background: url("./hero.webp") center / cover no-repeat;
+        overflow: hidden;
       }
-
-      .hero::before {
-        content: "";
+      .hero__overlay {
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.66);
+        background:
+          radial-gradient(120% 90% at 50% 0%, rgba(33, 28, 24, .35), transparent 60%),
+          linear-gradient(to bottom, rgba(33, 28, 24, .55), rgba(33, 28, 24, .35) 40%, rgba(33, 28, 24, .78));
       }
-
-      .hero--inner {
-        padding: 2em;
+      .hero__inner {
         position: relative;
-        /* display: flex;
-        flex-direction: column; */
-        /* align-items: center; */
-        text-align: center;
-        /* gap: 1em; */
+        z-index: 2;
+        max-width: 780px;
+        padding-block: 8rem;
       }
-
-      .hero p {
-        font-size: 1.25rem;
-        max-width: 600px;
-        /* margin: 0 auto 2rem; */
+      .hero__place {
+        display: inline-flex;
+        align-items: center;
+        gap: .6rem;
+        margin-bottom: 1.4rem;
+        font-size: .78rem;
+        font-weight: 700;
+        letter-spacing: .28em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .85);
       }
-
+      .hero__place::before, .hero__place::after {
+        content: "";
+        width: 28px;
+        height: 1px;
+        background: rgba(255, 255, 255, .5);
+      }
+      .hero h1 { color: #fff; margin-bottom: 1.4rem; text-shadow: 0 2px 30px rgba(0, 0, 0, .3); }
+      .hero__lead {
+        max-width: 560px;
+        margin: 0 auto 2.4rem;
+        font-size: 1.15rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, .9);
+      }
       .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+      }
+      .hero__scroll {
+        position: absolute;
+        left: 50%;
+        bottom: 1.8rem;
+        transform: translateX(-50%);
+        z-index: 2;
+        width: 26px;
+        height: 42px;
+        border: 2px solid rgba(255, 255, 255, .55);
+        border-radius: 999px;
+      }
+      .hero__scroll::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 8px;
+        width: 4px;
+        height: 8px;
+        margin-left: -2px;
+        border-radius: 999px;
+        background: #fff;
+        animation: scrollcue 1.8s ease-in-out infinite;
+      }
+      @keyframes scrollcue {
+        0% { opacity: 0; transform: translateY(-4px); }
+        40% { opacity: 1; }
+        80% { opacity: 0; transform: translateY(10px); }
+        100% { opacity: 0; }
+      }
+
+      /* Staggered hero entrance */
+      .hero__place, .hero h1, .hero__lead, .hero__actions {
+        animation: heroRise .9s cubic-bezier(.22, 1, .36, 1) both;
+      }
+      .hero h1 { animation-delay: .12s; }
+      .hero__lead { animation-delay: .24s; }
+      .hero__actions { animation-delay: .36s; }
+      @keyframes heroRise {
+        from { opacity: 0; transform: translateY(24px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      /* ===================================================================
+         ABOUT
+      =================================================================== */
+      .about {
+        display: grid;
+        gap: clamp(2.5rem, 5vw, 4rem);
+        align-items: center;
+      }
+      .stats { display: flex; gap: 2.5rem; margin-top: 2rem; }
+      .stat { display: flex; flex-direction: column; gap: .2rem; }
+      .stat__num {
+        font-family: var(--font-display);
+        font-size: 2.4rem;
+        font-weight: 600;
+        color: var(--clay);
+        line-height: 1;
+      }
+      .stat__label {
+        font-size: .85rem;
+        font-weight: 600;
+        letter-spacing: .04em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      /* Carousel */
+      .carousel {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+      }
+      .carousel .myimg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity .7s ease;
+      }
+      .carousel .myimg.active { opacity: 1; }
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 44px;
+        height: 44px;
+        padding: 12px;
+        background: rgba(251, 247, 239, .85);
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+        transition: background .2s ease, transform .2s ease;
+      }
+      .arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+      .arrow.left { left: 14px; }
+      .arrow.right { right: 14px; }
+      .progress {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 4px;
+        width: 0%;
+        background: var(--clay);
+        z-index: 2;
+      }
+
+      /* ===================================================================
+         ROOMS
+      =================================================================== */
+      .rooms {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .room-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+      }
+      .room-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--line-2);
+      }
+      .room-card__media { overflow: hidden; }
+      .room-card__media img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+      }
+      .room-card:hover .room-card__media img { transform: scale(1.06); }
+      .room-card__body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 1rem;
+        padding: 1.3rem;
+      }
+      .room-card__head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: .8rem;
+      }
+      .room-card__head h3 { flex: 1; }
+      .room-card__price {
+        flex-shrink: 0;
+        padding: .35rem .7rem;
+        background: var(--paper-2);
+        border-radius: 999px;
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--clay-2);
+      }
+      .room-card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .4rem;
+        list-style: none;
+      }
+      .room-card__tags li {
+        padding: .3rem .7rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: .78rem;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .room-card__body .btn { margin-top: auto; }
+
+      /* ===================================================================
+         AMENITIES
+      =================================================================== */
+      .amenities {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem 1.5rem;
+      }
+      .amenity { text-align: center; }
+      .amenity__icon {
+        width: 68px;
+        height: 68px;
+        margin: 0 auto 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        transition: background .3s ease, border-color .3s ease, transform .3s ease;
+      }
+      .amenity__icon img { width: 28px; height: 28px; }
+      .amenity:hover .amenity__icon {
+        background: var(--clay);
+        border-color: var(--clay);
+        transform: translateY(-4px);
+      }
+      .amenity:hover .amenity__icon img { filter: brightness(0) invert(1); }
+      .amenity h3 { margin-bottom: .4rem; }
+      .amenity .lead-muted { font-size: .95rem; }
+
+      /* ===================================================================
+         REVIEWS
+      =================================================================== */
+      .reviews {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .review {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        padding: 1.75rem;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .review__stars { color: var(--gold); font-size: 1rem; letter-spacing: .15em; }
+      .review__text {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-style: italic;
+        line-height: 1.6;
+        color: var(--ink-2);
+      }
+      .review__author { display: flex; flex-direction: column; margin-top: auto; }
+      .review__name { font-weight: 700; color: var(--ink); }
+      .review__meta { font-size: .85rem; color: var(--muted); }
+
+      /* ===================================================================
+         LOCATION
+      =================================================================== */
+      .location { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: center; }
+      .location h2 { margin-bottom: 2rem; }
+      .location-detail { display: flex; gap: 1.1rem; margin-bottom: 1.6rem; }
+      .location-detail__icon {
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+      .location-detail__icon img { width: 22px; height: 22px; }
+      .location-info h3 { margin-bottom: .2rem; }
+      .location-info a { color: var(--muted); transition: color .2s ease; }
+      .location-info a:hover { color: var(--clay); }
+
+      /* Phone line with messaging-app icons (WhatsApp / Viber) */
+      .phone-line { display: flex; align-items: center; gap: .5rem; }
+      .contact-apps { display: inline-flex; align-items: center; gap: .4rem; }
+      .contact-app { display: inline-flex; flex-shrink: 0; }
+      .contact-app img { width: 18px; height: 18px; display: block; transition: transform .2s ease; }
+      .contact-app:hover img { transform: scale(1.15); }
+
+      .map-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 340px;
+        padding: 2rem;
+        background: var(--paper-2);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .map-box iframe { width: 100%; height: 360px; border: 0; border-radius: var(--radius); }
+      .map-box__icon { width: 56px; height: 56px; margin-bottom: 1rem; opacity: .5; }
+      .map-box h3 { margin-bottom: .4rem; }
+      .map-box .lead-muted { margin-bottom: 1.4rem; }
+
+      /* ===================================================================
+         CTA
+      =================================================================== */
+      .cta {
+        position: relative;
+        padding: clamp(4rem, 8vw, 6.5rem) 0;
+        text-align: center;
+        color: #fff;
+        background:
+          radial-gradient(100% 120% at 50% 0%, rgba(188, 108, 76, .35), transparent 55%),
+          var(--ink);
+        overflow: hidden;
+      }
+      .cta__inner { position: relative; max-width: 640px; }
+      .cta h2 { color: #fff; margin-bottom: 1rem; }
+      .cta__lead {
+        margin: 0 auto 2.2rem;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, .82);
+      }
+      .cta__actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+      /* ===================================================================
+         FOOTER
+      =================================================================== */
+      .site-footer {
+        padding: clamp(3rem, 6vw, 4.5rem) 0 2rem;
+        background: var(--paper-2);
+        border-top: 1px solid var(--line);
+        font-size: .92rem;
+      }
+      .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-brand { display: flex; flex-direction: column; gap: .8rem; max-width: 300px; }
+      .footer-brand__name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; }
+      .footer-col { display: flex; flex-direction: column; gap: .7rem; }
+      .footer-col__title {
+        font-family: var(--font-body);
+        font-size: .78rem;
+        font-weight: 700;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: var(--ink);
+        margin-bottom: .3rem;
+      }
+      .footer-col a, .footer-col span { color: var(--muted); transition: color .2s ease; }
+      .footer-col a:hover { color: var(--clay); }
+      .footer-bottom {
+        max-width: var(--maxw);
+        margin: 3rem auto 0;
+        padding: 1.6rem clamp(1.25rem, 4vw, 2.5rem) 0;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        color: var(--muted);
+        font-size: .85rem;
       }
 
-
-
-    .btn {
-      padding: 0.8rem 2rem;
-      cursor: pointer;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      border: none;
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: white;
-      border: 1px solid white;
-    }
-
-    .btn-map {
-      margin-top: 1em;
-      padding: 0.75rem 2rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      background-color: white;
-      cursor: pointer;
-      color: rgb(var(--text));
-      border: 1px solid #E4E4E7;
-      font-weight: 600;
-    }
-
-    .nav-btn {
-      background-color: var(--primary);
-      color: white;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-
-
-.section {
-  padding: 4em 1em;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-
-.grid {
-  display: grid;
-  gap: 2rem;
-}
-
-/* ABOUT */
-.about-grid {
-  max-width: 1024px;
-  margin: 0 auto;
-}
-
-.about-stats {
-  margin-top: 2em;
-  display: flex;
-  justify-content: space-evenly;
-  gap: 1em;
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 2rem; */
-}
-
-.about-stat {
-  text-align: center;
-}
-
-.about-stat__number {
-  font-size: 1.5rem;
-  color: var(--primary);
-  font-weight: bold;
-}
-
-.about-stat strong {
-  font-size: 1.5rem;
-  color: var(--primary);
-  display: block;
-}
-
-
-.rooms-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.room-card {
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  background: white;
-}
-
-.room-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.room-card-body {
-  padding: 1rem;
-  flex: 1;
-}
-
-.room-card-body__title {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-}
-
-.room-card-body h3 {
-  font-size: 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.room-price {
-  background: #f3f4f6;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 9999px;
-  color: var(--text);
-}
-
-.room-desc {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.room-details {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.room-btn {
-  padding: 0.5rem;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.amenities-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.amenity {
-  text-align: center;
-  padding: 1rem;
-}
-
-.amenity-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 1rem;
-  /* background: var(--primary); */
-  background-color: #E7E7E8;
-  color: white;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.amenity h3 {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.review-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.review-card {
-  border: 1px solid #e5e7eb;
-  padding: 1.5rem;
-  border-radius: 8px;
-  background: white;
-}
-
-.review-stars {
-  color: gold;
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.review-text {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.reviewer-name {
-  font-weight: bold;
-}
-
-.reviewer-meta {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.location-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.location-detail {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.location-detail-icon {
-  font-size: 1.5rem;
-  color: var(--primary);
-}
-
-.location-info h3 {
-  margin: 0 0 0.25rem;
-  font-weight: bold;
-}
-
-.map-box {
-  background: #f3f4f6;
-  border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.cta-section {
-  background: var(--primary);
-  color: white;
-  padding: 4rem 1rem;
-  text-align: center;
-}
-
-.cta-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 400px;
-  margin: 2rem auto 0;
-}
-
-.cta-buttons a {
-  flex: 1;
-  padding: 0.75rem;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.cta-buttons .primary {
-  background: white;
-  color: var(--primary);
-}
-
-.cta-buttons .outline {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-}
-
-footer {
-  border-top: 1px solid #e5e7eb;
-  padding: 3em 1em;
-  font-size: 0.8rem;
-  background: #fff;
-}
-
-.footer-grid {
-  display: grid;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-logo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.footer-bottom {
-  width: 100%;
-  text-align: center;
-  margin: 2rem auto 0 auto;
-  padding-top: 2em;
-  color: var(--muted);
-  border-top: 1px solid #E4E4E7;
-}
-
-.footer__links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-
-.lang-menu {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  /* font-size: 1rem; */
-}
-.lang-selected {
-  /* width: 64px; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* padding: 0.4rem 0.6rem; */
-  background: #f1f1f1;
-  /* border-radius: 5px; */
-  font-size: 14px;
-  /* border: 1px solid #ccc; */
-  padding: 0.5rem 1rem;
-      /* border: none; */
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-}
-.lang-selected img {
-  height: 16px;
-}
-.lang-options {
-  width: 64px;
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 999;
-}
-.lang-options div {
-  padding: 0.4rem 0.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.95rem;
-  transition: background 0.2s;
-}
-.lang-options div:hover {
-  background: #f0f0f0;
-}
-.lang-options img {
-  width: 20px;
-  height: 14px;
-}
-
-
-
-      /* Modal styles */
+      /* ===================================================================
+         MODALS
+      =================================================================== */
       .modal {
         display: none;
         position: fixed;
+        inset: 0;
         z-index: 999;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0,0,0,0.7);
+        padding: 1.25rem;
+        background: rgba(24, 20, 16, .72);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
         justify-content: center;
         align-items: center;
+        animation: fadeIn .25s ease;
       }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
       .modal-content {
         position: relative;
-        width: 90%;
-        max-width: 800px;
-        background-color: #000;
-        padding: 0;
-        border-radius: 8px;
+        width: min(880px, 100%);
+        background: #000;
+        border-radius: var(--radius);
         overflow: hidden;
+        box-shadow: var(--shadow-lg);
       }
+      .modal-content video { width: 100%; height: auto; display: block; }
+
       .modal-content-room {
         position: relative;
-        width: 90%;
-        max-width: 800px;
-        height: 80vh;
-        background-color: white;
-        padding: 0;
-        border-radius: 8px;
-        overflow-y: scroll;
-        /* overflow: hidden; */
+        width: min(880px, 100%);
+        max-height: 90vh;
+        background: var(--paper);
+        border-radius: var(--radius);
+        overflow-y: auto;
+        box-shadow: var(--shadow-lg);
       }
-
-      .modal-content video {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-
       .close {
         position: absolute;
-        top: 10px;
-        right: 15px;
+        top: 14px;
+        right: 14px;
+        z-index: 3;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        line-height: 1;
         color: #fff;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(24, 20, 16, .5);
         border: none;
-        border-radius: 4px;
-        padding: 0 8px;
-        z-index: 1;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background .2s ease;
+      }
+      .close:hover { background: rgba(24, 20, 16, .8); }
+
+      /* Room modal gallery */
+      .carousel-room { width: 100%; }
+      .main-image {
+        width: 100%;
+        height: clamp(280px, 45vh, 460px);
+        object-fit: cover;
+        display: block;
+      }
+      .thumbnails {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .thumbnail {
+        width: 74px;
+        height: 74px;
+        flex-shrink: 0;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        opacity: .7;
+        transition: opacity .2s ease, border-color .2s ease;
+      }
+      .thumbnail:hover { opacity: 1; }
+      .thumbnail.active { border-color: var(--clay); opacity: 1; }
+      .carousel-room__content { padding: 1.5rem clamp(1.5rem, 4vw, 2.25rem) 2rem; }
+      .carousel-room__content h3 { font-size: 1.5rem; margin-bottom: .9rem; }
+      .carousel-room__content p { margin-bottom: 1.6rem; color: var(--ink-2); }
+      .carousel-room__actions { display: flex; justify-content: flex-start; }
+
+      /* ===================================================================
+         SCROLL REVEAL
+      =================================================================== */
+      .js .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity .8s cubic-bezier(.22, 1, .36, 1),
+                    transform .8s cubic-bezier(.22, 1, .36, 1);
+      }
+      .js .reveal.is-visible { opacity: 1; transform: none; }
+
+      /* ===================================================================
+         RESPONSIVE
+      =================================================================== */
+      @media (min-width: 700px) {
+        .rooms { grid-template-columns: repeat(2, 1fr); }
+        .amenities { grid-template-columns: repeat(2, 1fr); }
+        .reviews { grid-template-columns: repeat(3, 1fr); }
+        .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; }
       }
 
-    /* Carousel */
-    .carousel {
-      position: relative;
-      width: 100%;
-      height: 320px;
-      overflow: hidden;
-      border-radius: 6px;
-    }
-
-    .carousel .myimg {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .carousel .myimg.active {
-      opacity: 1;
-      /* z-index: 1; */
-    }
-
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      /* font-size: 32px;
-      color: white;
-      background: rgba(0, 0, 0, 0.4);
-      border: none;
-      padding: 2px;
-      cursor: pointer;
-      z-index: 2;
-      border-radius: 50%;
-      user-select: none; */
-      z-index: 2;
-      height: 32px;
-      width: 32px;
-      background-color: transparent;
-      color: white;
-    }
-
-    .arrow:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .left {
-      left: 15px;
-    }
-
-    .right {
-      right: 15px;
-    }
-
-    .progress {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 5px;
-      background: white;
-      width: 0%;
-      z-index: 2;
-      transition: width linear;
-    }
-
-
-    .carousel-room {
-      max-width: 800px;
-      width: 100%;
-    }
-
-    .carousel-room__content {
-      padding: 1em;
-    }
-
-    .carousel-room__content__actions {
-      display: flex;
-      justify-content: center;
-    }
-
-    .main-image {
-      width: 100%;
-      height: 450px;
-      border-radius: 8px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .thumbnails {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      /* flex-wrap: wrap; */
-      overflow-x: scroll;
-    }
-
-    .thumbnail {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 4px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: border 0.2s;
-      box-sizing: border-box;
-    }
-
-    .thumbnail.active {
-      border-color: #007bff;
-    }
-
-      @media (min-width: 640px) {
-        .cta-buttons {
-          flex-direction: row;
-          justify-content: center;
-        }
-      }
-
-      @media (min-width: 768px) {
-        header {
-          width: 66%;
-          margin: 0 auto;
-        }
-
-        nav {
-          display: initial;
-        }
-
-        h1 {
-          font-size: 3rem;
-        }
-
-        .hero--inner {
-          padding: 0;
-        }
-
-        .hero__actions {
-          flex-direction: row;
-          justify-content: center;
-        }
-
-        .rooms-grid, .amenities-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .review-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-
-        .footer-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-
-        .footer-bottom {
-          width: 50%;
-        }
+      @media (min-width: 900px) {
+        .site-nav { display: block; }
+        .about { grid-template-columns: 1.05fr 1fr; }
+        .location { grid-template-columns: 1fr 1fr; }
       }
 
       @media (min-width: 1024px) {
-        .about-grid, .location-grid {
-          grid-template-columns: repeat(2, 1fr);
-          align-items: center;
-        }
+        .rooms { grid-template-columns: repeat(3, 1fr); }
+        .amenities { grid-template-columns: repeat(3, 1fr); }
+      }
 
-        .rooms-grid {
-          grid-template-columns: repeat(3, 1fr);
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+          animation-duration: .001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: .001ms !important;
         }
-
-        .amenities-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
+        .js .reveal { opacity: 1; transform: none; }
       }
     </style>
 
     <script defer>
+      document.documentElement.classList.add("js");
+
       let currentLang = "gb";
 
       const flagMap = {
-        gb: { emoji: '🇬🇧', img: './flags/gb.svg' },
-        rs: { emoji: '🇷🇸', img: './flags/rs.svg' },
-        de: { emoji: '🇩🇪', img: './flags/de.svg' },
-        bg: { emoji: '🇧🇬', img: './flags/bg.svg' },
-        mk: { emoji: '🇲🇰', img: './flags/mk.svg' },
-        ro: { emoji: '🇷🇴', img: './flags/ro.svg' }
+        gb: { code: "GB", img: "./flags/gb.svg" },
+        rs: { code: "RS", img: "./flags/rs.svg" },
+        de: { code: "DE", img: "./flags/de.svg" },
+        bg: { code: "BG", img: "./flags/bg.svg" },
+        mk: { code: "MK", img: "./flags/mk.svg" },
+        ro: { code: "RO", img: "./flags/ro.svg" }
       };
 
       const translations = {
         // ========== HEADER ==========
         title: {
-          gb: "Villa Salute",
+          gb: "Vila Salute",
           rs: "Vila Salute",
-          de: "Villa Salute",
+          de: "Vila Salute",
           bg: "Вила Салуте",
           mk: "Вила Салуте",
           ro: "Vila Salute"
@@ -1396,6 +1447,22 @@ footer {
           mk: "Услуги",
           ro: "Servicii"
         },
+        luggageStorage: {
+          gb: "Luggage Storage",
+          rs: "Čuvanje prtljaga",
+          de: "Gepäckaufbewahrung",
+          bg: "Съхранение на багаж",
+          mk: "Чување на багаж",
+          ro: "Depozitare bagaje"
+        },
+        tourBooking: {
+          gb: "Tour Booking",
+          rs: "Rezervacija tura",
+          de: "Tourbuchung",
+          bg: "Резервация на екскурзии",
+          mk: "Резервација на тури",
+          ro: "Rezervare tururi"
+        },
         contactInfo: {
           gb: "Contact Info",
           rs: "Kontakt informacije",
@@ -1414,42 +1481,54 @@ footer {
         }
       };
 
+      /* -------------------------------------------------------------
+         Modal helpers
+      ------------------------------------------------------------- */
+      function openModalById(id) {
+        document.getElementById(id).style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
 
+      function closeModalById(id) {
+        document.getElementById(id).style.display = "none";
+        document.body.style.overflow = "";
+      }
+
+      function closeAnyModal() {
+        if (document.getElementById("videoModal").style.display === "flex") closeModal();
+        if (document.getElementById("roomModal").style.display === "flex") closeRoomModal();
+      }
+
+      /* -------------------------------------------------------------
+         Room detail dialog
+      ------------------------------------------------------------- */
       function openRoomDialog(room) {
-        const roomsLength = {
-          "1": 5,
-          "2": 5,
-          "3": 6,
-          "4": 4,
-          "5": 4,
-          "6": 2,
-          "7": 5,
-          "8": 6,
-          "9": 13,
-          "10": 6,
-          "11": 9
+        const roomImageCounts = {
+          "1": 5, "2": 5, "3": 6, "4": 4, "5": 4, "6": 2,
+          "7": 5, "8": 6, "9": 13, "10": 6, "11": 9
         };
+        const count = roomImageCounts[room] || 1;
 
         const imgs = [];
-
-        for (let i = 1; i <= roomsLength[room]; i += 1) {
+        for (let i = 1; i <= count; i += 1) {
           imgs.push(`./rooms/${room}/${i}.webp`);
         }
 
         const thumbnailsContainer = document.getElementById("thumbnails");
         const mainImage = document.getElementById("mainImage");
-        const roomModalTitle = document.getElementById("roomModalTitle");
-        const roomModalDescription = document.getElementById("roomModalDescription");
 
+        document.getElementById("roomModalTitle").innerText = translations[`room${room}Title`][currentLang];
+        document.getElementById("roomModalDescription").innerText = translations[`room${room}Description`][currentLang];
+
+        thumbnailsContainer.innerHTML = "";
         mainImage.src = imgs[0];
-
-        roomModalTitle.innerText = translations[`room${room}Title`][currentLang];
-        roomModalDescription.innerText = translations[`room${room}Description`][currentLang];
 
         imgs.forEach((src, index) => {
           const thumb = document.createElement("img");
           thumb.src = src;
-          thumb.className = "thumbnail" + (index === 0 ? " active" : ""); // default active image
+          thumb.alt = "";
+          thumb.loading = "lazy";
+          thumb.className = "thumbnail" + (index === 0 ? " active" : "");
           thumb.onclick = () => {
             mainImage.src = src;
             document.querySelectorAll(".thumbnail").forEach(el => el.classList.remove("active"));
@@ -1458,83 +1537,112 @@ footer {
           thumbnailsContainer.appendChild(thumb);
         });
 
-        const modal = document.getElementById("roomModal");
-
-        modal.style.display = "flex";
+        openModalById("roomModal");
       }
 
       function closeRoomModal() {
-        const modal = document.getElementById("roomModal");
-        const thumbnailsContainer = document.getElementById("thumbnails");
-
-        modal.style.display = "none";
-        thumbnailsContainer.innerHTML = "";
+        document.getElementById("thumbnails").innerHTML = "";
+        closeModalById("roomModal");
       }
 
+      /* -------------------------------------------------------------
+         Language switcher
+      ------------------------------------------------------------- */
       function toggleLangMenu() {
         const menu = document.getElementById("lang-options");
         menu.style.display = menu.style.display === "block" ? "none" : "block";
       }
 
       function setLang(lang, shouldClose = false) {
+        if (!flagMap[lang]) lang = "gb";
         currentLang = lang;
         localStorage.setItem("language", lang);
         document.getElementById("lang-options").style.display = "none";
 
         const selected = document.getElementById("lang-selected");
-        selected.innerHTML = `${flagMap[lang].emoji} <img src="${flagMap[lang].img}" alt="${lang.toUpperCase()}">`;
+        selected.innerHTML = `${flagMap[lang].code} <img src="${flagMap[lang].img}" alt="${lang.toUpperCase()}">`;
 
         for (const key in translations) {
-          const elements = document.querySelectorAll(
-            `[data-translate="${key}"]`
-          );
-
+          const elements = document.querySelectorAll(`[data-translate="${key}"]`);
           if (!elements.length) { continue; }
-
           for (const element of elements) {
             element.innerText = translations[key][lang];
           }
         }
 
-        if (shouldClose) {toggleLangMenu();}
+        if (shouldClose) { toggleLangMenu(); }
       }
 
+      /* -------------------------------------------------------------
+         Video tour modal
+      ------------------------------------------------------------- */
       function openModal() {
-        const modal = document.getElementById("videoModal");
         const video = document.getElementById("modalVideo");
-        const videoSrc = document.getElementById("videoSrc");
-
         video.src = `./videos/${currentLang}.mp4`;
-        modal.style.display = "flex";
-        // videoSrc.src = `./videos/${currentLang}.mp4`;
-        // video.play();
+        openModalById("videoModal");
       }
 
       function closeModal() {
-        const modal = document.getElementById("videoModal");
         const video = document.getElementById("modalVideo");
-
-        modal.style.display = "none";
         video.pause();
         video.currentTime = 0;
+        closeModalById("videoModal");
       }
 
+      /* -------------------------------------------------------------
+         Reveal interactive map
+      ------------------------------------------------------------- */
       function onViewMap() {
         const map = document.getElementById("map");
-        const viewMap = document.getElementById("viewMap");
-
-        map.style.display = "initial";
-        viewMap.style.display = "none";
+        const iframe = map.querySelector("iframe");
+        if (iframe && !iframe.src) iframe.src = iframe.dataset.src;
+        map.style.display = "block";
+        document.getElementById("viewMap").style.display = "none";
       }
 
+      /* -------------------------------------------------------------
+         Boot
+      ------------------------------------------------------------- */
       window.onload = () => {
-        const savedLang = localStorage.getItem("language") || "en";
+        const savedLang = localStorage.getItem("language") || "gb";
         setLang(savedLang);
 
+        /* Header hairline on scroll */
+        const header = document.querySelector(".site-header");
+        const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
 
+        /* Reveal on scroll */
+        const revealEls = document.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              // Reveal when in view, or if the page loaded already scrolled past it.
+              if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+          revealEls.forEach((el) => io.observe(el));
+        } else {
+          revealEls.forEach((el) => el.classList.add("is-visible"));
+        }
 
-        const images = Array.from(document.querySelectorAll('.myimg'));
-        const progressBar = document.getElementById('progressBar');
+        /* Dismiss modals via backdrop click or Escape */
+        document.querySelectorAll(".modal").forEach((modal) => {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeAnyModal();
+          });
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeAnyModal();
+        });
+
+        /* About image carousel */
+        const images = Array.from(document.querySelectorAll(".myimg"));
+        const progressBar = document.getElementById("progressBar");
         let current = 0;
         let interval;
         const intervalDuration = 5000;
@@ -1547,25 +1655,16 @@ footer {
         }
 
         function showImage(index) {
-          images.forEach((img, i) => {
-            img.classList.toggle('active', i === index);
-          });
+          images.forEach((img, i) => img.classList.toggle("active", i === index));
           current = index;
           resetProgressBar();
         }
 
-        function nextImage() {
-          showImage((current + 1) % images.length);
-        }
-
-        function prevImage() {
-          showImage((current - 1 + images.length) % images.length);
-        }
+        function nextImage() { showImage((current + 1) % images.length); }
+        function prevImage() { showImage((current - 1 + images.length) % images.length); }
 
         function startAutoSlide() {
-          interval = setInterval(() => {
-            nextImage();
-          }, intervalDuration);
+          interval = setInterval(nextImage, intervalDuration);
           startProgressBar();
         }
 
@@ -1575,650 +1674,531 @@ footer {
         }
 
         function resetProgressBar() {
-          progressBar.style.transition = 'none';
-          progressBar.style.width = '0%';
+          progressBar.style.transition = "none";
+          progressBar.style.width = "0%";
+          void progressBar.offsetWidth; /* force reflow before re-animating */
           startProgressBar();
-          // requestAnimationFrame(() => {
-          //   progressBar.style.transition = `width ${intervalDuration}ms linear`;
-          //   progressBar.style.width = '100%';
-          // });
         }
 
         function startProgressBar() {
           progressBar.style.transition = `width ${intervalDuration}ms linear`;
-          progressBar.style.width = '100%';
+          progressBar.style.width = "100%";
         }
 
-        document.querySelector('.left').addEventListener('click', () => {
-          prevImage();
-          resetTimer();
-        });
-
-        document.querySelector('.right').addEventListener('click', () => {
-          nextImage();
-          resetTimer();
-        });
+        document.querySelector(".left").addEventListener("click", () => { prevImage(); resetTimer(); });
+        document.querySelector(".right").addEventListener("click", () => { nextImage(); resetTimer(); });
 
         shuffleImages();
         showImage(0);
         startAutoSlide();
-
-
-        // const imgs = [
-        //   "https://picsum.photos/id/1005/800/450",
-        //   "https://picsum.photos/id/1011/800/450",
-        //   "https://picsum.photos/id/1015/800/450",
-        //   "https://picsum.photos/id/1016/800/450",
-        //   "https://picsum.photos/id/1025/800/450",
-        //   "https://picsum.photos/id/1031/800/450",
-        //   "https://picsum.photos/id/1043/800/450",
-        //   "https://picsum.photos/id/1050/800/450"
-        // ];
-
-        // const thumbnailsContainer = document.getElementById("thumbnails");
-        // const mainImage = document.getElementById("mainImage");
-
-        // imgs.forEach((src, index) => {
-        //   const thumb = document.createElement("img");
-        //   thumb.src = src;
-        //   thumb.className = "thumbnail" + (index === 2 ? " active" : ""); // default active image
-        //   thumb.onclick = () => {
-        //     mainImage.src = src;
-        //     document.querySelectorAll(".thumbnail").forEach(el => el.classList.remove("active"));
-        //     thumb.classList.add("active");
-        //   };
-        //   thumbnailsContainer.appendChild(thumb);
-        // });
       };
     </script>
-
-    <title>Vila Salute</title>
   </head>
 
   <body>
 
-    <div class="header-wrapper">
-      <header class="header">
+    <!-- ============================ HEADER ============================ -->
+    <header class="site-header">
+      <div class="site-header__inner container">
 
-        <div class="header__main">
-          <img class="header__main__logo" src="./logo.png" alt="Logo"/>
-          <div data-translate="title">Villa Salute</div>
-        </div>
+        <a class="brand" href="#top">
+          <img class="brand__logo" src="./logo.png" alt="Vila Salute logo" />
+          <span class="brand__name" data-translate="title">Vila Salute</span>
+        </a>
 
-        <nav>
+        <nav class="site-nav">
           <ul>
-            <li>
-              <a href="#about" data-translate="aboutLink">About</a>
-            </li>
-            <li>
-              <a href="#rooms" data-translate="roomsLink">Rooms</a>
-            </li>
-            <li>
-              <a href="#amenities" data-translate="amenitiesLink">Amenities</a>
-            </li>
-            <li>
-              <a href="#location" data-translate="locationLink">Location</a>
-            </li>
-            <li>
-              <a href="#contact" data-translate="contactLink">Contact</a>
-            </li>
+            <li><a href="#about" data-translate="aboutLink">About</a></li>
+            <li><a href="#rooms" data-translate="roomsLink">Rooms</a></li>
+            <li><a href="#amenities" data-translate="amenitiesLink">Amenities</a></li>
+            <li><a href="#location" data-translate="locationLink">Location</a></li>
+            <li><a href="#location" data-translate="contactLink">Contact</a></li>
           </ul>
         </nav>
 
-        <div>
-          <a href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank">
-          <button class="nav-btn" data-translate="bookNow">Book Now</button></a>
+        <div class="site-header__actions">
+          <a class="btn btn--primary btn--sm"
+             href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html"
+             target="_blank" rel="noopener"
+             data-translate="bookNow">Book Now</a>
+
           <div class="lang-menu" onclick="toggleLangMenu()">
             <div class="lang-selected" id="lang-selected">
-              🇬🇧 <img src="./flags/gb.svg" alt="GB" loading="lazy"/>
+              GB <img src="./flags/gb.svg" alt="GB" loading="lazy" />
             </div>
             <div class="lang-options" id="lang-options">
-              <div onclick="setLang('gb', true)">🇬🇧 <img height="16" src="./flags/gb.svg" alt="GB" loading="lazy"></div>
-              <div onclick="setLang('rs', true)">🇷🇸 <img height="16" src="./flags/rs.svg" alt="RS" loading="lazy"></div>
-              <div onclick="setLang('de', true)">🇩🇪 <img height="16" src="./flags/de.svg" alt="DE" loading="lazy"></div>
-              <div onclick="setLang('bg', true)">🇧🇬 <img height="16" src="./flags/bg.svg" alt="BG" loading="lazy"></div>
-              <div onclick="setLang('mk', true)">🇲🇰 <img height="16" src="./flags/mk.svg" alt="MK" loading="lazy"></div>
-              <div onclick="setLang('ro', true)">🇷🇴 <img height="16" src="./flags/ro.svg" alt="RO" loading="lazy"></div>
+              <div onclick="setLang('gb', true)">GB <img src="./flags/gb.svg" alt="GB" loading="lazy"></div>
+              <div onclick="setLang('rs', true)">RS <img src="./flags/rs.svg" alt="RS" loading="lazy"></div>
+              <div onclick="setLang('de', true)">DE <img src="./flags/de.svg" alt="DE" loading="lazy"></div>
+              <div onclick="setLang('bg', true)">BG <img src="./flags/bg.svg" alt="BG" loading="lazy"></div>
+              <div onclick="setLang('mk', true)">MK <img src="./flags/mk.svg" alt="MK" loading="lazy"></div>
+              <div onclick="setLang('ro', true)">RO <img src="./flags/ro.svg" alt="RO" loading="lazy"></div>
             </div>
           </div>
         </div>
 
-      </header>
-    </div>
+      </div>
+    </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero--inner">
-
+    <!-- ============================= HERO ============================= -->
+    <section class="hero" id="top">
+      <div class="hero__overlay"></div>
+      <div class="hero__inner">
+        <p class="hero__place">Niš &middot; Serbia</p>
         <h1 data-translate="heroTitle">Welcome to Vila Salute</h1>
-
-        <p data-translate="heroDescription">
+        <p class="hero__lead" data-translate="heroDescription">
           Your home away from home. Experience comfort, community, and adventure in the heart of the city.
         </p>
-
         <div class="hero__actions">
-          <a class="btn btn-primary" href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank"><button style="all: unset" data-translate="bookYourStay">
-            Book Your Stay
-          </button></a>
-          <button
-            class="btn btn-outline"
-            data-translate="takeTour"
-            onclick="openModal()">
+          <a class="btn btn--primary btn--lg"
+             href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html"
+             target="_blank" rel="noopener"
+             data-translate="bookYourStay">Book Your Stay</a>
+          <button class="btn btn--ghost-light btn--lg" data-translate="takeTour" onclick="openModal()">
             Take a Tour
           </button>
         </div>
-
       </div>
+      <div class="hero__scroll" aria-hidden="true"></div>
     </section>
 
+    <!-- Video tour modal -->
     <div class="modal" id="videoModal">
       <div class="modal-content">
-        <button class="close" onclick="closeModal()">&times;</button>
-        <video id="modalVideo" controls>
+        <button class="close" onclick="closeModal()" aria-label="Close">&times;</button>
+        <video id="modalVideo" controls preload="none">
           <source id="videoSrc" src="./videos/gb.mp4" type="video/mp4">
           Your browser does not support HTML5 video.
         </video>
       </div>
     </div>
 
-    <!-- About Section -->
+    <!-- ============================ ABOUT ============================ -->
     <section class="section" id="about">
-      <div class="about-grid grid">
+      <div class="container about">
 
-        <div>
-          <div class="badge" data-translate="aboutBadge">About Us</div>
-
+        <div class="about__text reveal">
+          <p class="badge" data-translate="aboutBadge">About Us</p>
           <h2 data-translate="aboutTitle">More Than Just a Place to Sleep</h2>
-
-          <p class="text-muted" data-translate="aboutDescription">
+          <p class="lead-muted" data-translate="aboutDescription">
             Vila Salute is a modern hotel designed for travelers who value comfort, cleanliness, and community.
             Located in the vibrant heart of the city, we offer the perfect base for exploring local attractions,
             meeting fellow travelers, and creating unforgettable memories.
           </p>
-
-          <div class="about-stats text-muted">
-            <div class="about-stat">
-              <div class="about-stat__number">150+</div>
-              <span data-translate="happyGuests">Happy Guests</span>
+          <div class="stats">
+            <div class="stat">
+              <span class="stat__num">150+</span>
+              <span class="stat__label" data-translate="happyGuests">Happy Guests</span>
             </div>
-            <div class="about-stat">
-              <div class="about-stat__number">4.8</div>
-              <span data-translate="rating">Rating</span>
+            <div class="stat">
+              <span class="stat__num">4.8</span>
+              <span class="stat__label" data-translate="rating">Rating</span>
             </div>
           </div>
         </div>
 
-        <div class="carousel">
-          <!-- <button  > -->
-            <img class="arrow left" src="./icons/caret-left.svg" alt="go left" onclick="prevImage()"/>
-          <!-- </button> -->
-          <!-- <button  > -->
-            <img class="arrow right" src="./icons/caret-right.svg" alt="go right" onclick="nextImage()"/>
-          <!-- </button> -->
+        <div class="carousel reveal">
+          <img class="arrow left" src="./icons/caret-left.svg" alt="Previous image" />
+          <img class="arrow right" src="./icons/caret-right.svg" alt="Next image" />
           <div class="progress" id="progressBar"></div>
-          <img class="myimg" src="./rooms/1/1.webp" class="active" alt="Image 1" loading="lazy">
-          <img class="myimg" src="./rooms/2/1.webp" alt="Image 2" loading="lazy">
-          <img class="myimg" src="./rooms/3/1.webp" alt="Image 3" loading="lazy">
-          <img class="myimg" src="./rooms/4/1.webp" alt="Image 4" loading="lazy">
-          <img class="myimg" src="./rooms/5/1.webp" alt="Image 5" loading="lazy">
-          <img class="myimg" src="./rooms/6/1.webp" alt="Image 6" loading="lazy">
-          <img class="myimg" src="./rooms/7/1.webp" alt="Image 7" loading="lazy">
-          <img class="myimg" src="./rooms/8/1.webp" alt="Image 8" loading="lazy">
-          <img class="myimg" src="./rooms/9/1.webp" alt="Image 9" loading="lazy">
-          <img class="myimg" src="./rooms/10/1.webp" alt="Image 10" loading="lazy">
-          <img class="myimg" src="./rooms/11/1.webp" alt="Image 11" loading="lazy">
+          <img class="myimg" src="./rooms/1/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/2/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/3/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/4/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/5/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/6/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/7/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/8/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/9/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/10/1.webp" alt="Room" loading="lazy">
+          <img class="myimg" src="./rooms/11/1.webp" alt="Room" loading="lazy">
         </div>
 
       </div>
     </section>
 
-    <!-- Rooms Section -->
-    <section class="section" id="rooms" style="background: #f9fafb;">
-      <div class="rooms-grid grid">
+    <!-- ============================ ROOMS ============================ -->
+    <section class="section section--alt" id="rooms">
+      <div class="container">
 
-        <div class="section-title" style="grid-column: 1 / -1;">
-          <div class="badge" data-translate="accommodationBadge">Accommodation</div>
+        <div class="section-head">
+          <p class="badge" data-translate="accommodationBadge">Accommodation</p>
           <h2 data-translate="accommodationTitle">Choose Your Perfect Room</h2>
-          <p class="text-muted" data-translate="accommodationDescription">
+          <p class="lead-muted" data-translate="accommodationDescription">
             From budget-friendly dorms to private rooms, we have options for every traveler
           </p>
         </div>
 
-        <!-- 1 -->
-        <div class="room-card">
-          <img src="./rooms/1/1.webp" alt="Family room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room1Title">
-                Family room with 5 beds and private bathroom
-              </h3>
-              <div class="room-price">€50</div>
+        <div class="rooms">
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/1/1.webp" alt="Family room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room1Title">Family room with 5 beds and private bathroom</h3>
+                <span class="room-card__price">€50</span>
+              </div>
+              <ul class="room-card__tags"><li>5 people</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('1')">Details</button>
             </div>
-            <!-- <p class="room-desc" data-translate="room1Description">
-              Perfect for larger families or a group of friends, this spacious room offers a total of 5 beds – two bunk beds and a comfortable single bed. Tastefully designed for maximum comfort and functionality, guests have a private bathroom equipped with all essentials for a pleasant stay. Ideal for those seeking practicality, comfort, and privacy in one place.
-            </p> -->
-            <div class="room-details">
-              <span>5 people</span>
-              <span>Private bath</span>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/2/1.webp" alt="Twin room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room2Title">Twin room with separate single beds</h3>
+                <span class="room-card__price">€28</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('2')">Details</button>
             </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('1')">Details</button>
-          </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/3/1.webp" alt="Twin room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room3Title">Twin room with separate single beds</h3>
+                <span class="room-card__price">€28</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('3')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/4/1.webp" alt="Triple room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room4Title">Triple room with double and single bed</h3>
+                <span class="room-card__price">€33</span>
+              </div>
+              <ul class="room-card__tags"><li>3 people</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('4')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/5/1.webp" alt="Triple room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room5Title">Triple room with double and single bed</h3>
+                <span class="room-card__price">€33</span>
+              </div>
+              <ul class="room-card__tags"><li>3 people</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('5')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/6/1.webp" alt="Romantic double room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room6Title">Romantic double room with queen bed and balcony</h3>
+                <span class="room-card__price">€38</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Balcony</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('6')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/7/1.webp" alt="Luxury room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room7Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+                <span class="room-card__price">€50</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Jacuzzi</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('7')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/8/1.webp" alt="Luxury room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room8Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+                <span class="room-card__price">€50</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Jacuzzi</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('8')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/9/1.webp" alt="Luxury room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room9Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+                <span class="room-card__price">€60</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Jacuzzi</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('9')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/10/1.webp" alt="Luxury room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room10Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+                <span class="room-card__price">€50</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Jacuzzi</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('10')">Details</button>
+            </div>
+          </article>
+
+          <article class="room-card reveal">
+            <div class="room-card__media"><img src="./rooms/11/1.webp" alt="Luxury room" loading="lazy"></div>
+            <div class="room-card__body">
+              <div class="room-card__head">
+                <h3 data-translate="room11Title">Luxury room with jacuzzi, living area and king-size bed</h3>
+                <span class="room-card__price">€60</span>
+              </div>
+              <ul class="room-card__tags"><li>2 people</li><li>Jacuzzi</li><li>Private bath</li></ul>
+              <button class="btn btn--primary btn--block" data-translate="details" onclick="openRoomDialog('11')">Details</button>
+            </div>
+          </article>
+
         </div>
-
-        <!-- 2 -->
-        <div class="room-card">
-          <img src="./rooms/2/1.webp" alt="Twin room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room2Title">Twin room with separate single beds</h3>
-              <div class="room-price">€28</div>
-            </div>
-            <!-- <p class="room-desc">Savršen izbor za prijatelje, kolege ili putnike koji žele sopstveni prostor za odmor. Ova udobna dvokrevetna soba nudi dva odvojena single ležaja, pažljivo raspoređena kako bi se obezbedio komfor i privatnost. Soba je svetla, uredna i funkcionalno opremljena, uz pristup svim neophodnim sadržajima za prijatan boravak.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('2')">Details</button>
-          </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="room-card">
-          <img src="./rooms/3/1.webp" alt="Twin room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room3Title">Twin room with separate single beds</h3>
-              <div class="room-price">€28</div>
-            </div>
-            <!-- <p class="room-desc">Savršen izbor za prijatelje, kolege ili putnike koji žele sopstveni prostor za odmor. Ova udobna dvokrevetna soba nudi dva odvojena single ležaja, pažljivo raspoređena kako bi se obezbedio komfor i privatnost. Soba je svetla, uredna i funkcionalno opremljena, uz pristup svim neophodnim sadržajima za prijatan boravak.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('3')">Details</button>
-          </div>
-        </div>
-
-        <!-- 4 -->
-        <div class="room-card">
-          <img src="./rooms/4/1.webp" alt="Triple room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room4Title">Triple room with double and single bed</h3>
-              <div class="room-price">€33</div>
-            </div>
-            <!-- <p class="room-desc">Ova udobna i funkcionalna soba idealna je za porodicu, par sa detetom ili troje putnika. Nudi jedan francuski ležaj (bračni krevet) i jedan single ležaj, pružajući dovoljno prostora za prijatan i miran odmor. Soba je moderno uređena, klimatizovana i poseduje sve što vam je potrebno za komforan boravak.</p> -->
-            <div class="room-details">
-              <span>3 people</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('4')">Details</button>
-          </div>
-        </div>
-
-        <!-- 5 -->
-        <div class="room-card">
-          <img src="./rooms/5/1.webp" alt="Triple room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room5Title">Triple room with double and single bed</h3>
-              <div class="room-price">€33</div>
-            </div>
-            <!-- <p class="room-desc">Ova udobna i funkcionalna soba idealna je za porodicu, par sa detetom ili troje putnika. Nudi jedan francuski ležaj (bračni krevet) i jedan single ležaj, pružajući dovoljno prostora za prijatan i miran odmor. Soba je moderno uređena, klimatizovana i poseduje sve što vam je potrebno za komforan boravak.</p> -->
-            <div class="room-details">
-              <span>3 people</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('5')">Details</button>
-          </div>
-        </div>
-
-        <!-- 6 -->
-        <div class="room-card">
-          <img src="./rooms/6/1.webp" alt="Romantic double room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room6Title">Romantic double room with queen bed and balcony</h3>
-              <div class="room-price">€38</div>
-            </div>
-            <!-- <p class="room-desc">Savršen izbor za parove koji traže mir, udobnost i prijatan ambijent. Soba sadrži prostran francuski ležaj, idealan za opuštanje i uživanje u dvoje. Privatni balkon omogućava gostima da uživaju u jutarnjoj kafi ili večernjem zalasku sunca na svežem vazduhu. Pažljivo uređena u toplim tonovima, soba pruža osećaj privatnosti i komfora, pogodna kako za kraći boravak, tako i za duže opuštanje. Uživajte u prijatnom ambijentu i svim pogodnostima koje su vam na raspolaganju.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Balcony</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('6')">Details</button>
-          </div>
-        </div>
-
-        <!-- 7 -->
-        <div class="room-card">
-          <img src="./rooms/7/1.webp" alt="Luxury room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room7Title">Luxury room with jacuzzi, living area and king-size bed</h3>
-              <div class="room-price">€50</div>
-            </div>
-            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Jacuzzi</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('7')">Details</button>
-          </div>
-        </div>
-
-        <!-- 8 -->
-        <div class="room-card">
-          <img src="./rooms/8/1.webp" alt="Luxury room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room8Title">Luxury room with jacuzzi, living area and king-size bed</h3>
-              <div class="room-price">€50</div>
-            </div>
-            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Jacuzzi</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('8')">Details</button>
-          </div>
-        </div>
-
-        <!-- 9 -->
-        <div class="room-card">
-          <img src="./rooms/9/1.webp" alt="Luxury room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room9Title">Luxury room with jacuzzi, living area and king-size bed</h3>
-              <div class="room-price">€60</div>
-            </div>
-            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Jacuzzi</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('9')">Details</button>
-          </div>
-        </div>
-
-        <!-- 10 -->
-        <div class="room-card">
-          <img src="./rooms/10/1.webp" alt="Luxury room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room10Title">Luxury room with jacuzzi, living area and king-size bed</h3>
-              <div class="room-price">€50</div>
-            </div>
-
-            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Jacuzzi</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('10')">Details</button>
-          </div>
-        </div>
-
-        <!-- 11 -->
-        <div class="room-card">
-          <img src="./rooms/11/1.webp" alt="Luxury room" loading="lazy">
-          <div class="room-card-body">
-            <div class="room-card-body__title">
-              <h3 data-translate="room11Title">Luxury room with jacuzzi, living area and king-size bed</h3>
-              <div class="room-price">€60</div>
-            </div>
-
-            <!-- <p class="room-desc">Doživite vrhunski komfor i eleganciju u ovoj luksuznoj sobi, savršenoj za romantične trenutke ili posebne prilike. Soba sadrži prostrani king size krevet, privatni đakuzi za potpuno opuštanje, kao i stilizovani dnevni boravak idealan za uživanje u paru. Goste dočekuje boca šampanjca kao znak dobrodošlice, uz ambijent koji odiše sofisticiranošću i pažljivo biranim detaljima. Uživajte u potpunoj privatnosti, luksuzu i atmosferi koja ostavlja utisak.</p> -->
-            <div class="room-details">
-              <span>2 people</span>
-              <span>Jacuzzi</span>
-              <span>Private bath</span>
-            </div>
-            <button class="room-btn" data-translate="details" onclick="openRoomDialog('11')">Details</button>
-          </div>
-        </div>
-
       </div>
     </section>
 
+    <!-- Room detail modal -->
     <div class="modal" id="roomModal">
       <div class="modal-content-room">
-        <button class="close" onclick="closeRoomModal()">&times;</button>
+        <button class="close" onclick="closeRoomModal()" aria-label="Close">&times;</button>
         <div class="carousel-room">
-          <img id="mainImage" class="main-image" alt="Main Image" loading="lazy">
+          <img id="mainImage" class="main-image" alt="Room" loading="lazy">
           <div class="thumbnails" id="thumbnails"></div>
           <div class="carousel-room__content">
-            <h3 id="roomModalTitle">Mnogo jaka soba</h3>
-            <p id="roomModalDescription">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat ipsum ex nisi blanditiis nemo voluptatem repellat, fuga ratione deserunt quos omnis esse molestiae id quisquam, maxime cupiditate ut distinctio voluptates?</p>
-            <div class="carousel-room__content__actions">
-              <a href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank"><button class="btn btn-primary" data-translate="bookNow">
-                Book Now
-              </button></a>
+            <h3 id="roomModalTitle"></h3>
+            <p id="roomModalDescription"></p>
+            <div class="carousel-room__actions">
+              <a href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank" rel="noopener"
+                 class="btn btn--primary" data-translate="bookNow">Book Now</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Amenities Section -->
+    <!-- ========================== AMENITIES ========================== -->
     <section class="section" id="amenities">
+      <div class="container">
 
-      <div class="section-title">
-        <div class="badge" data-translate="facilitiesBadge">Facilities</div>
-        <h2 data-translate="facilitiesTitle">Everything you need</h2>
-        <p class="text-muted" data-translate="facilitiesDescription">
-          Modern amenities and services to make your stay comfortable and memorable.
-        </p>
-      </div>
-
-      <div class="amenities-grid grid">
-        <div class="amenity">
-          <div class="amenity-icon"><img src="./icons/wifi-high.svg" loading="lazy"/></div>
-          <h3 data-translate="wifiTitle">Free WiFi</h3>
-          <p class="text-muted" data-translate="wifiDescription">
-            High-speed internet throughout the hotel
+        <div class="section-head">
+          <p class="badge" data-translate="facilitiesBadge">Facilities</p>
+          <h2 data-translate="facilitiesTitle">Everything you need</h2>
+          <p class="lead-muted" data-translate="facilitiesDescription">
+            Modern amenities and services to make your stay comfortable and memorable.
           </p>
-        </div>
-        <div class="amenity">
-          <div class="amenity-icon"><img src="./icons/coffee.svg" loading="lazy"/></div>
-          <h3 data-translate="commonAreaTitle">Common Area</h3>
-          <p class="text-muted" data-translate="commonAreaDescription">
-            Relax and meet other travelers
-          </p>
-        </div>
-        <div class="amenity">
-          <div class="amenity-icon"><img src="./icons/car-profile.svg" loading="lazy"/></div>
-          <h3 data-translate="parkingTitle">Parking</h3>
-          <p class="text-muted" data-translate="parkingDescription">
-            Free parking available for guests
-          </p>
-        </div>
-        <div class="amenity">
-          <div class="amenity-icon"><img src="./icons/shield.svg" loading="lazy"/></div>
-          <h3 data-translate="securityTitle">24/7 Security</h3>
-          <p class="text-muted" data-translate="securityDescription">
-            Safe and secure environment
-          </p>
-        </div>
-        <div class="amenity">
-          <div class="amenity-icon"><img src="./icons/snowflake.svg" loading="lazy"/></div>
-          <h3 data-translate="acTitle">Air Conditioning</h3>
-          <p class="text-muted" data-translate="acDescription">
-            Climate controlled rooms
-          </p>
-        </div>
-        <div class="amenity">
-          <div class="amenity-icon"><img src="./icons/clock.svg" loading="lazy"/></div>
-          <h3 data-translate="receptionTitle">24/7 Reception</h3>
-          <p class="text-muted" data-translate="receptionDescription">
-            Always here to help you
-          </p>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- Reviews Section -->
-    <section class="section" style="background: #f9fafb;">
-      <div class="section-title">
-        <div class="badge" data-translate="reviewsBadge">Reviews</div>
-        <h2 data-translate="reviewsTitle">What Our Guests Say</h2>
-      </div>
-
-      <div class="review-grid grid">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            "More than correct accommodation, friendly staff, clean, warm. For every recommendation."
-          </p>
-          <div class="reviewer-name">Goran</div>
-          <div class="reviewer-meta">Serbia</div>
         </div>
 
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            "Very nice service. Location close to the highway. Easy access. Rooms clean and tidy. I recommend it with all my heart"
-          </p>
-          <div class="reviewer-name">Andrzej</div>
-          <div class="reviewer-meta">Poland</div>
+        <div class="amenities">
+          <div class="amenity reveal">
+            <div class="amenity__icon"><img src="./icons/wifi-high.svg" alt="" loading="lazy" /></div>
+            <h3 data-translate="wifiTitle">Free WiFi</h3>
+            <p class="lead-muted" data-translate="wifiDescription">High-speed internet throughout the hotel</p>
+          </div>
+          <div class="amenity reveal">
+            <div class="amenity__icon"><img src="./icons/coffee.svg" alt="" loading="lazy" /></div>
+            <h3 data-translate="commonAreaTitle">Common Area</h3>
+            <p class="lead-muted" data-translate="commonAreaDescription">Relax and meet other travelers</p>
+          </div>
+          <div class="amenity reveal">
+            <div class="amenity__icon"><img src="./icons/car-profile.svg" alt="" loading="lazy" /></div>
+            <h3 data-translate="parkingTitle">Parking</h3>
+            <p class="lead-muted" data-translate="parkingDescription">Free parking available for guests</p>
+          </div>
+          <div class="amenity reveal">
+            <div class="amenity__icon"><img src="./icons/shield.svg" alt="" loading="lazy" /></div>
+            <h3 data-translate="securityTitle">24/7 Security</h3>
+            <p class="lead-muted" data-translate="securityDescription">Safe and secure environment</p>
+          </div>
+          <div class="amenity reveal">
+            <div class="amenity__icon"><img src="./icons/snowflake.svg" alt="" loading="lazy" /></div>
+            <h3 data-translate="acTitle">Air Conditioning</h3>
+            <p class="lead-muted" data-translate="acDescription">Climate controlled rooms</p>
+          </div>
+          <div class="amenity reveal">
+            <div class="amenity__icon"><img src="./icons/clock.svg" alt="" loading="lazy" /></div>
+            <h3 data-translate="receptionTitle">24/7 Reception</h3>
+            <p class="lead-muted" data-translate="receptionDescription">Always here to help you</p>
+          </div>
         </div>
 
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">
-            "We had a night check-in, 24-hour reception, no problems, very nice and friendly staff, the hotel is in an easily accessible and convenient location, its own parking, the room is spacious, with all the amenities, clean, beautiful and modern design, good Wi-Fi, check-out until 14-00. We will stay on our next trip, thank you for your hospitality!"
-          </p>
-          <div class="reviewer-name">Tatiana</div>
-          <div class="reviewer-meta">Bulgaria</div>
-        </div>
       </div>
     </section>
 
-    <!-- Location Section -->
+    <!-- =========================== REVIEWS =========================== -->
+    <section class="section section--alt" id="reviews">
+      <div class="container">
+
+        <div class="section-head">
+          <p class="badge" data-translate="reviewsBadge">Reviews</p>
+          <h2 data-translate="reviewsTitle">What Our Guests Say</h2>
+        </div>
+
+        <div class="reviews">
+          <figure class="review reveal">
+            <div class="review__stars">★★★★★</div>
+            <blockquote class="review__text">
+              "More than correct accommodation, friendly staff, clean, warm. For every recommendation."
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__name">Goran</span>
+              <span class="review__meta">Serbia</span>
+            </figcaption>
+          </figure>
+
+          <figure class="review reveal">
+            <div class="review__stars">★★★★★</div>
+            <blockquote class="review__text">
+              "Very nice service. Location close to the highway. Easy access. Rooms clean and tidy. I recommend it with all my heart"
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__name">Andrzej</span>
+              <span class="review__meta">Poland</span>
+            </figcaption>
+          </figure>
+
+          <figure class="review reveal">
+            <div class="review__stars">★★★★★</div>
+            <blockquote class="review__text">
+              "We had a night check-in, 24-hour reception, no problems, very nice and friendly staff, the hotel is in an easily accessible and convenient location, its own parking, the room is spacious, with all the amenities, clean, beautiful and modern design, good Wi-Fi, check-out until 14-00. We will stay on our next trip, thank you for your hospitality!"
+            </blockquote>
+            <figcaption class="review__author">
+              <span class="review__name">Tatiana</span>
+              <span class="review__meta">Bulgaria</span>
+            </figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================== LOCATION =========================== -->
     <section class="section" id="location">
-      <div class="location-grid grid">
-        <div>
-          <div class="badge" data-translate="locationBadge">Location</div>
-          <h2 data-translate="locationTitle">
-            Find Us in the Heart of the City
-          </h2>
+      <div class="container location">
+
+        <div class="reveal">
+          <p class="badge" data-translate="locationBadge">Location</p>
+          <h2 data-translate="locationTitle">Find Us in the Heart of the City</h2>
 
           <div class="location-detail">
-            <div class="location-detail-icon"><img src="./icons/map-pin.svg" loading="lazy"/></div>
+            <div class="location-detail__icon"><img src="./icons/map-pin.svg" alt="" loading="lazy" /></div>
             <div class="location-info">
               <h3 data-translate="address">Address</h3>
-              <p class="text-muted">
-                <a href="https://g.co/kgs/uCFGCev" target="_blank">Dimitrija Tucovića 153<br>
-                18000 Niš, Serbia</a>
+              <p><a href="https://g.co/kgs/uCFGCev" target="_blank" rel="noopener">Niš, Serbia,<br>Dimitrija Tucovića 153</a></p>
+            </div>
+          </div>
+
+          <div class="location-detail">
+            <div class="location-detail__icon"><img src="./icons/phone.svg" alt="" loading="lazy" /></div>
+            <div class="location-info">
+              <h3 data-translate="phone">Phone</h3>
+              <p><a href="tel:+38118262490">+381 18 262 490</a></p>
+              <p class="phone-line">
+                <span class="contact-apps">
+                  <a class="contact-app" href="https://wa.me/381659400200" target="_blank" rel="noopener" aria-label="Message on WhatsApp"><img src="./icons/whatsapp.svg" alt="WhatsApp"></a>
+                  <a class="contact-app" href="viber://chat?number=%2B381659400200" aria-label="Message on Viber"><img src="./icons/viber.svg" alt="Viber"></a>
+                </span>
+                <a href="tel:+381659400200">+381 65 940 0200</a>
               </p>
             </div>
           </div>
 
           <div class="location-detail">
-            <div class="location-detail-icon">
-              <img src="./icons/phone.svg" loading="lazy"/>
-            </div>
-            <div class="location-info">
-              <h3 data-translate="phone">Phone</h3>
-              <p class="text-muted"><a href="tel:+38118262490">+381 18 262 490</a><br/><a href="tel:+381658998969">+381 65 899 8969</a></p>
-            </div>
-          </div>
-
-          <div class="location-detail">
-            <div class="location-detail-icon"><img src="./icons/envelope-simple.svg" loading="lazy"/></div>
+            <div class="location-detail__icon"><img src="./icons/envelope-simple.svg" alt="" loading="lazy" /></div>
             <div class="location-info">
               <h3 data-translate="email">Email</h3>
-              <p class="text-muted"><a href="mailto:vilasalutelux@gmail.com">
-vilasalutelux@gmail.com</a></p>
+              <p><a href="mailto:vilasalutelux@gmail.com">vilasalutelux@gmail.com</a></p>
             </div>
           </div>
         </div>
 
-        <div class="map-box" style="display: none;" id="map">
-          <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1726.0931258324426!2d21.856066282766484!3d43.3157029185788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4755b761bbe5dd07%3A0xe92370c1ade9be39!2sDimitrija%20Tucovi%C4%87a%20153%2C%20Ni%C5%A1!5e0!3m2!1sen!2srs!4v1750707399183!5m2!1sen!2srs" width="512" height="288" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="mapFrame"></iframe> -->
-          <iframe src="https://www.google.com/maps/embed?pb=!4v1751062877233!6m8!1m7!1scGO4pkGoBlLQ0Fnbbd5snQ!2m2!1d43.31596440051143!2d21.85789875588952!3f181.91!4f-12.530000000000001!5f0.7820865974627469" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <div class="map-box" id="viewMap">
-          <img src="./icons/map-pin.svg" height="64" loading="lazy">
-          <h3 style="margin: 1rem 0 0.5rem;" data-translate="mapTitle">Interactive Map</h3>
-          <p class="text-muted" data-translate="mapDescription">Click to view our exact location and nearby attractions</p>
-          <div>
-            <button
-              class="btn-map"
-              data-translate="viewOnMap"
-              onclick="onViewMap()">
-              View on Map
-            </button>
+        <div class="location__map reveal">
+          <div class="map-box" id="map" style="display: none; padding: 0;">
+            <iframe data-src="https://www.google.com/maps/embed?pb=!4v1751062877233!6m8!1m7!1scGO4pkGoBlLQ0Fnbbd5snQ!2m2!1d43.31596440051143!2d21.85789875588952!3f181.91!4f-12.530000000000001!5f0.7820865974627469" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="map-box" id="viewMap">
+            <img class="map-box__icon" src="./icons/map-pin.svg" alt="" loading="lazy">
+            <h3 data-translate="mapTitle">Interactive Map</h3>
+            <p class="lead-muted" data-translate="mapDescription">Click to view our exact location and nearby attractions</p>
+            <button class="btn btn--outline" data-translate="viewOnMap" onclick="onViewMap()">View on Map</button>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-      <h2 data-translate="ctaTitle">Ready for Your Next Adventure?</h2>
-      <p style="opacity: 0.9; max-width: 600px; margin: 1rem auto;" data-translate="ctaDescription">
-        Book your stay at Vila Salute today and experience the perfect blend of comfort, community, and convenience.
-      </p>
-      <div class="cta-buttons">
-        <!-- <button class="btn primary" data-translate="bookNow"> -->
-          <a class="primary" data-translate="bookNow" href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html" target="_blank">Book Now</a>
-        <!-- </button> -->
-        <a href="mailto:vilasalutelux@gmail.com" class="outline" data-translate="contactUs">Contact Us</a>
-        <!-- <button class="outline" data-translate="contactUs">Contact Us</button> -->
+    <!-- ============================= CTA ============================= -->
+    <section class="cta">
+      <div class="container cta__inner">
+        <h2 data-translate="ctaTitle">Ready for Your Next Adventure?</h2>
+        <p class="cta__lead" data-translate="ctaDescription">
+          Book your stay at Vila Salute today and experience the perfect blend of comfort, community, and convenience.
+        </p>
+        <div class="cta__actions">
+          <a class="btn btn--light btn--lg"
+             href="https://www.booking.com/hotel/rs/guest-house-vila-salute.html"
+             target="_blank" rel="noopener"
+             data-translate="bookNow">Book Now</a>
+          <a class="btn btn--ghost-light btn--lg" href="mailto:vilasalutelux@gmail.com" data-translate="contactUs">Contact Us</a>
+        </div>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="footer-grid">
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="site-footer">
+      <div class="container footer-grid">
 
-        <div class="footer-logo">
-          <div data-translate="title">Vila Salute</div>
-          <p class="text-muted" data-translate="footerDescription">
+        <div class="footer-brand">
+          <span class="footer-brand__name" data-translate="title">Vila Salute</span>
+          <p class="lead-muted" data-translate="footerDescription">
             Your home away from home in the heart of the city.
           </p>
         </div>
 
-        <div class="text-muted footer__links">
-          <h3 class="text-black" data-translate="quickLinks">Quick Links</h3>
+        <div class="footer-col">
+          <span class="footer-col__title" data-translate="quickLinks">Quick Links</span>
           <a href="#about" data-translate="aboutLink">About</a>
           <a href="#rooms" data-translate="roomsLink">Rooms</a>
           <a href="#amenities" data-translate="amenitiesLink">Amenities</a>
           <a href="#location" data-translate="locationLink">Location</a>
-          <a href="#contact" data-translate="contactLink">Contact</a>
+          <a href="#location" data-translate="contactLink">Contact</a>
         </div>
 
-        <div class="text-muted footer__links">
-          <h3 class="text-black" data-translate="services">Services</h3>
-          <div>24/7 Reception</div>
-          <div>Luggage Storage</div>
-          <div>Tour Booking</div>
-          <div>Airport Transfer</div>
+        <div class="footer-col">
+          <span class="footer-col__title" data-translate="services">Services</span>
+          <span data-translate="receptionTitle">24/7 Reception</span>
+          <span data-translate="luggageStorage">Luggage Storage</span>
+          <span data-translate="tourBooking">Tour Booking</span>
         </div>
 
-        <div class="text-muted footer__links">
-          <h3 class="text-black" data-translate="contactInfo">Contact Info</h3>
-          <div>Dimitrija Tucovića 153</div>
-          <div>18000 Niš, Serbia</div>
-          <div><a href="tel:+38118262490">+381 18 262 490</a></div>
-          <div><a href="tel:+381658998969">+381 65 899 8969</a></div>
-          <div><a href="mailto:vilasalutelux@gmail.com">vilasalutelux@gmail.com</a></div>
+        <div class="footer-col">
+          <span class="footer-col__title" data-translate="contactInfo">Contact Info</span>
+          <a href="https://g.co/kgs/uCFGCev" target="_blank" rel="noopener">Niš, Serbia,<br>Dimitrija Tucovića 153</a>
+          <a href="tel:+38118262490">+381 18 262 490</a>
+          <span class="phone-line">
+            <span class="contact-apps">
+              <a class="contact-app" href="https://wa.me/381659400200" target="_blank" rel="noopener" aria-label="Message on WhatsApp"><img src="./icons/whatsapp.svg" alt="WhatsApp"></a>
+              <a class="contact-app" href="viber://chat?number=%2B381659400200" aria-label="Message on Viber"><img src="./icons/viber.svg" alt="Viber"></a>
+            </span>
+            <a href="tel:+381659400200">+381 65 940 0200</a>
+          </span>
+          <a href="mailto:vilasalutelux@gmail.com">vilasalutelux@gmail.com</a>
         </div>
 
       </div>
 
       <div class="footer-bottom">
         © <script>document.write(new Date().getFullYear())</script>
-        Vila Salute.
-        <span data-translate="allRightsReserved">All rights reserved.</span>
+        Vila Salute. <span data-translate="allRightsReserved">All rights reserved.</span>
       </div>
     </footer>
 
